@@ -1,3 +1,14 @@
+/******************************************************************************
+Author: Kang Xuan
+
+Name of Class: Player
+
+Description of Class: This class will control the movement and actions of a 
+                        player avatar based on user input.
+
+Date Created: 23/07/2021
+******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +16,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     /// <summary>
-    /// The distance this player will travel per second.
+    /// Player settings to adjust speed, stamina and rate of stamina regen, 
+    /// as well as the length of the raycast.
     /// </summary>
     [Header("Player Settings")]
     public float moveSpeed;
     public float stamina;
     public float staminaRegen;
+    [SerializeField]
+    private int raycastLength;
 
     /// <summary>
     /// The camera attached to the player model.
@@ -134,11 +148,16 @@ public class Player : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Raycast for player interaction.
+    /// </summary>
     private void Raycast()
     {
+        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * raycastLength);
+
         RaycastHit hit;
 
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward * 10, out hit, Mathf.Infinity))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, raycastLength))
         {
             if (hit.collider.CompareTag("Interactable"))
             {
