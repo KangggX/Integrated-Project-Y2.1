@@ -21,8 +21,10 @@ public class Player : MonoBehaviour
     /// </summary>
     [Header("Player Settings")]
     public float moveSpeed;
+    public float moveSpeedMultiplier;
     public float stamina;
     public float staminaRegen;
+    public int health;
     public int raycastLength;
 
     /// <summary>
@@ -33,6 +35,9 @@ public class Player : MonoBehaviour
     [Header("Camera Settings")]
     public Camera playerCamera;
     public float rotationSpeed;
+
+    [Space(10)]
+    public HealthBar healthBar;
 
     [HideInInspector]
     public bool inDialogue;
@@ -64,7 +69,9 @@ public class Player : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         nextState = "Idle";
+        healthBar.SetMaxHealth(health);
     }
 
     // Update is called once per frame
@@ -74,6 +81,8 @@ public class Player : MonoBehaviour
         {
             SwitchState();
         }
+
+        healthBar.SetHealth(health);
 
         CheckRotation();
         CheckSprint();
@@ -150,22 +159,31 @@ public class Player : MonoBehaviour
 
         if (movementVector.sqrMagnitude > 0)
         {
-            movementVector *= moveSpeed * Time.deltaTime;
+            movementVector *= moveSpeed * moveSpeedMultiplier * Time.deltaTime;
             newPos += movementVector;
 
             transform.position = newPos;
-            return false;
+            return true;
         }
         else
         {
-            return true;
+            return false;
         }
 
     }
 
     private void CheckSprint()
     {
-        
+        float multiplier = moveSpeedMultiplier;
+
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
+        {
+            moveSpeedMultiplier = multiplier;
+        }
+        else
+        {
+            multiplier = 1;
+        }
     }
 
     /// <summary>
