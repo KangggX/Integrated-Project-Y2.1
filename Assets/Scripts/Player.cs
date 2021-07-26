@@ -23,8 +23,7 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public float stamina;
     public float staminaRegen;
-    [SerializeField]
-    private int raycastLength;
+    public int raycastLength;
 
     /// <summary>
     /// The camera attached to the player model.
@@ -35,21 +34,41 @@ public class Player : MonoBehaviour
     public Camera playerCamera;
     public float rotationSpeed;
 
+    [HideInInspector]
+    public bool inDialogue;
+
+    /// <summary>
+    /// Coroutine variable for player movement
+    /// </summary>
     private string currentState;
     private string nextState;
+
+    /// <summary>
+    /// Stored variables from the player class.
+    /// To be used to revert modifications made to these variables.
+    /// </summary>
+    private int storedRaycastLength;
+    private float storedMoveSpeed;
     private float storedRotationSpeed;
 
+    private void Awake()
+    {
+        // To store the player default Raycast, MoveSpeed and RotationSpeed value.
+        storedRaycastLength = raycastLength;
+        storedMoveSpeed = moveSpeed;
+        storedRotationSpeed = rotationSpeed;
+    }
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        storedRotationSpeed = rotationSpeed;
         nextState = "Idle";
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (nextState != currentState)
         {
@@ -58,6 +77,7 @@ public class Player : MonoBehaviour
 
         CheckRotation();
         CheckSprint();
+        CheckDialogue();
         Raycast();
     }
 
@@ -145,7 +165,33 @@ public class Player : MonoBehaviour
 
     private void CheckSprint()
     {
+        
+    }
 
+    /// <summary>
+    /// To check if player is currently in a Dialogue.
+    /// If true, player won't be able to move, rotate camera and interact with objects.
+    /// If true and player press 'E', display next Dialogue sentence.
+    /// </summary>
+    private void CheckDialogue()
+    {
+        if (inDialogue)
+        {
+            raycastLength = 0;
+            moveSpeed = 0;
+            rotationSpeed = 0;
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                FindObjectOfType<DialogueManager>().DisplayNextSentence();
+            }
+        }
+        else
+        {
+            raycastLength = storedRaycastLength;
+            moveSpeed = storedMoveSpeed;
+            rotationSpeed = storedRotationSpeed;
+        }
     }
 
     /// <summary>
@@ -156,12 +202,17 @@ public class Player : MonoBehaviour
         Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * raycastLength);
 
         RaycastHit hit;
+        int layerMask = 1 << 3; //LayerMask for "Interactable" layer
 
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, raycastLength))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, raycastLength, layerMask))
         {
-            if (hit.collider.CompareTag("Interactable"))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("hi");
+                if (hit.collider.CompareTag("Dialogue"))
+                {
+                    hit.transform.GetComponent<DialogueTrigger>().TriggerDialogue();
+                    inDialogue = true;
+                }
             }
         }
     }
