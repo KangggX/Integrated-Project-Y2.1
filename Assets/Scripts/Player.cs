@@ -7,17 +7,19 @@ public class Player : MonoBehaviour
     /// <summary>
     /// The distance this player will travel per second.
     /// </summary>
-    [SerializeField]
-    private float moveSpeed;
-
-    [SerializeField]
-    private float rotationSpeed;
+    [Header("Player Settings")]
+    public float moveSpeed;
+    public float stamina;
+    public float staminaRegen;
 
     /// <summary>
     /// The camera attached to the player model.
     /// Should be dragged in from Inspector.
+    /// Settings can be played around.
     /// </summary>
+    [Header("Camera Settings")]
     public Camera playerCamera;
+    public float rotationSpeed;
 
     private string currentState;
     private string nextState;
@@ -41,6 +43,8 @@ public class Player : MonoBehaviour
         }
 
         CheckRotation();
+        CheckSprint();
+        Raycast();
     }
 
     /// <summary>
@@ -123,5 +127,23 @@ public class Player : MonoBehaviour
             return true;
         }
 
+    }
+
+    private void CheckSprint()
+    {
+
+    }
+
+    private void Raycast()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward * 10, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Interactable"))
+            {
+                Debug.Log("hi");
+            }
+        }
     }
 }
