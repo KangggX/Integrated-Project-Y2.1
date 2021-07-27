@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 
     [Space(10)]
     public HealthBar healthBar;
+    public UIManager uIManager;
 
     [HideInInspector]
     public bool inDialogue;
@@ -224,6 +225,8 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, raycastLength, layerMask))
         {
+            uIManager.SetCrosshairText(true, "Press 'E' to interact");
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (hit.collider.CompareTag("Dialogue"))
@@ -232,6 +235,10 @@ public class Player : MonoBehaviour
                     inDialogue = true;
                 }
             }
+        }
+        else
+        {
+            uIManager.SetCrosshairText(false, "");
         }
     }
 }

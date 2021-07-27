@@ -16,14 +16,13 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     /// <summary>
-    /// Adjustable Dialogue UI components, must be dragged in from Inspector.
+    /// UI Manager, must be dragged in from Inspector.
     /// </summary>
-    [Header("Dialogue UI Settings")]
-    public GameObject dialogueUI;
-    public TextMeshProUGUI dialogueName;
-    public TextMeshProUGUI dialogueSentence;
+    public UIManager uIManager;
 
-    [Space(10)]
+    /// <summary>
+    /// Player, must be dragged in from Inspector.
+    /// </summary>
     public Player player;
     
     private Queue<string> sentences;
@@ -42,7 +41,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         //Debug.Log("Staring conversation with " + dialogue.name);
-        dialogueUI.SetActive(true);
+        uIManager.dialogueUI.SetActive(true);
         sentences.Clear(); //Clear sentences from previous dialogue.
 
         foreach (string sentence in dialogue.sentences)
@@ -82,16 +81,16 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("End of dialogue");
         player.inDialogue = false;
-        dialogueUI.SetActive(false);
+        uIManager.dialogueUI.SetActive(false);
     }
 
     IEnumerator TypewriterText(string sentence)
     {
-        dialogueSentence.text = "";
+        uIManager.dialogueSentence.text = "";
 
         foreach (char letter in sentence.ToCharArray())
         {
-            dialogueSentence.text += letter;
+            uIManager.dialogueSentence.text += letter;
             yield return null;
         }
     }
