@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.CompareTag("Dialogue")) //If collider has a tag called "Dialogue"
             {
-                uIManager.SetCrosshairText(true, "Press 'E' to interact");
+                uIManager.SetCrosshairText(true, "Interact");
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -237,7 +237,7 @@ public class Player : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Collectible")) //If collider has a tag called "Collectible"
             {
-                uIManager.SetCrosshairText(true, "Press 'E' to collect");
+                uIManager.SetCrosshairText(true, "Collect");
             }
         }
         else

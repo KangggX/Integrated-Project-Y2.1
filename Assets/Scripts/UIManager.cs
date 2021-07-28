@@ -30,16 +30,29 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI dialogueName;
     public TextMeshProUGUI dialogueSentence;
 
+    private void Awake()
+    {
+        crosshairTextObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// When hovering over interactable object, players will need to be notified what they can do with it.
+    /// Thus, this function would show the text below the crosshair with the necessary message such as "Interact" or "Collect".
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="text"></param>
     public void SetCrosshairText(bool state, string text)
     {
         if (state)
         {
             crosshairTextObject.SetActive(true);
             crosshairText.text = text;
+            //crosshairText.alpha = 255;
         }
         else
         {
             crosshairTextObject.SetActive(false);
+            //crosshairText.alpha = 0;
         }
     }
 }
