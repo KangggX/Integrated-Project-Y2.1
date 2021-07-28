@@ -225,15 +225,19 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, raycastLength, layerMask))
         {
-            uIManager.SetCrosshairText(true, "Press 'E' to interact");
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (hit.collider.CompareTag("Dialogue")) //If collider has a tag called "Dialogue"
             {
-                if (hit.collider.CompareTag("Dialogue"))
+                uIManager.SetCrosshairText(true, "Press 'E' to interact");
+
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     hit.transform.GetComponent<DialogueTrigger>().TriggerDialogue();
                     inDialogue = true;
                 }
+            }
+            else if (hit.collider.CompareTag("Collectible")) //If collider has a tag called "Collectible"
+            {
+                uIManager.SetCrosshairText(true, "Press 'E' to collect");
             }
         }
         else
