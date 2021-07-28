@@ -1,11 +1,8 @@
 /******************************************************************************
 Author: Kang Xuan
-
 Name of Class: Player
-
 Description of Class: This class will control the movement and actions of a 
-                        player avatar based on user input.
-
+                      player avatar based on user input.
 Date Created: 23/07/2021
 ******************************************************************************/
 
