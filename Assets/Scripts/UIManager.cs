@@ -1,10 +1,7 @@
 /******************************************************************************
 Author: Kang Xuan
-
 Name of Class: UIManager
-
 Description of Class: Handles the overall UI of the game.
-
 Date Created: 27/07/2021
 ******************************************************************************/
 
