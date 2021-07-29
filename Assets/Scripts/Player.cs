@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // To ensure that the cursor is not visible when player is playing the game.
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [Header("Player UI Settings")]
     public GameObject crosshairTextObject;
     public TextMeshProUGUI crosshairText;
+    public GameObject pauseUI;
 
     /// <summary>
     /// Adjustable Dialogue UI components, must be dragged in from Inspector.
@@ -50,6 +51,18 @@ public class UIManager : MonoBehaviour
         {
             crosshairTextObject.SetActive(false);
             //crosshairText.alpha = 0;
+        }
+    }
+
+    public void SetPauseUI(bool isPaused)
+    {
+        if (isPaused)
+        {
+            pauseUI.SetActive(true);
+        }
+        else
+        {
+            pauseUI.SetActive(false);
         }
     }
 }
