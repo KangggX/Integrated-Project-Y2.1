@@ -20,8 +20,6 @@ public class Enemy : MonoBehaviour
         health = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = health;
-
-        
     }
 
     private void Update()

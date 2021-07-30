@@ -39,6 +39,7 @@ public class DialogueManager : MonoBehaviour
     {
         //Debug.Log("Staring conversation with " + dialogue.name);
         uIManager.dialogueUI.SetActive(true);
+        uIManager.dialogueName.text = dialogue.name + ":";
         sentences.Clear(); //Clear sentences from previous dialogue.
 
         foreach (string sentence in dialogue.sentences)
