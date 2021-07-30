@@ -5,16 +5,23 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public Slider healthBar;
     public float maxHealth;
+    public Canvas HealthPrefab;
 
     private float health;
+    private Canvas theCanvas;
+    private Slider healthBar;
 
     private void Start()
     {
+        theCanvas = Instantiate(HealthPrefab, gameObject.transform);
+        healthBar = theCanvas.GetComponentInChildren<Slider>();
+
         health = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = health;
+
+        
     }
 
     private void Update()
