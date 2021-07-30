@@ -7,7 +7,7 @@ TagManager:
   - Dialogue
   - Manager
   - Collectible
-  - AI
+  - Enemy
   layers:
   - Default
   - TransparentFX

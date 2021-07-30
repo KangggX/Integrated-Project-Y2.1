@@ -262,7 +262,7 @@ public class Player : MonoBehaviour
             {
                 uIManager.SetCrosshairText(true, "Collect");
             }
-            else if (hit.collider.CompareTag("AI"))
+            else if (hit.collider.CompareTag("Enemy"))
             {
                 if (Input.GetButtonDown("Fire1"))
                 {
@@ -276,9 +276,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Attack(GameObject AI)
+    private void Attack(GameObject enemy)
     {
-        Debug.Log("Attck!");
+        Debug.Log("Attack!");
+        enemy.GetComponent<Enemy>().TakeDamage();
     }
 
     /// <summary>
