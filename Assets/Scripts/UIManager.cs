@@ -8,6 +8,7 @@ Date Created: 27/07/2021
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
     /// Adjustable Player UI components, must be dragged in from Inspector.
     /// </summary>
     [Header("Player UI Settings")]
+    public Slider healthSlider;
+    public Slider staminaSlider;
     public GameObject crosshairTextObject;
     public TextMeshProUGUI crosshairText;
     public GameObject pauseUI;
@@ -31,6 +34,32 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         crosshairTextObject.SetActive(false);
+    }
+
+    // Function to be used to update the slider value of the health UI based on player health.
+    public void SetHealth(float health)
+    {
+        healthSlider.value = health;
+    }
+
+    // Function to set the max slider and slider value of the health UI based on the allocated max player health.
+    public void SetMaxHealth(float health)
+    {
+        healthSlider.maxValue = health;
+        healthSlider.value = health;
+    }
+
+    // Function to be used to update the slider value of the stamina UI based on player stamina.
+    public void SetStamina(float stamina)
+    {
+        staminaSlider.value = stamina;
+    }
+
+    // Function to set the max slider and slider value of the stamina UI based on the allocated max player stamina.
+    public void SetMaxStamina(float stamina)
+    {
+        staminaSlider.maxValue = stamina;
+        staminaSlider.value = stamina;
     }
 
     /// <summary>

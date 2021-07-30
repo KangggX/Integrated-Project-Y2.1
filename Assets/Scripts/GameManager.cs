@@ -1,3 +1,10 @@
+/******************************************************************************
+Author: Kang Xuan
+Name of Class: GameManager
+Description of Class: Handles the overall game.
+Date Created: 29/07/2021
+******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
