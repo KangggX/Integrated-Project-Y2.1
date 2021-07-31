@@ -8,6 +8,7 @@ TagManager:
   - Manager
   - Collectible
   - Enemy
+  - Puzzle
   layers:
   - Default
   - TransparentFX

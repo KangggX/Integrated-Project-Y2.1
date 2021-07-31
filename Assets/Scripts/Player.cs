@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// UI Settings that must be dragged in from Inspector.
     /// </summary>
-    [Header("UI Settings")]
+    [Header("Manager Settings")]
     public UIManager uIManager;
 
     [HideInInspector]
@@ -74,9 +74,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        GameManager gameManager = FindObjectOfType<GameManager>();
+
         // To ensure that the cursor is not visible when player is playing the game.
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        gameManager.CursorLock();
 
         // So that player will start the game in the Idle state.
         nextState = "Idle";
@@ -198,7 +199,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void CheckSprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && stamina >= 0)
+        if (Input.GetKey(KeyCode.LeftShift) && stamina >= 0 && CheckMovement())
         {
             moveSpeedMultiplier = storedMoveSpeedMultiplier;
             StaminaDeplete();
@@ -262,7 +263,16 @@ public class Player : MonoBehaviour
             {
                 uIManager.SetCrosshairText(true, "Collect");
             }
-            else if (hit.collider.CompareTag("Enemy"))
+            else if (hit.collider.CompareTag("Puzzle")) //If collider has a tag called "Puzzle"
+            {
+                uIManager.SetCrosshairText(true, "Place puzzle piece");
+
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    hit.transform.GetComponent<PuzzlePiece>().PickUp();
+                }
+            }
+            else if (hit.collider.CompareTag("Enemy")) //If collider has a tag called "Enemy"
             {
                 if (Input.GetButtonDown("Fire1"))
                 {

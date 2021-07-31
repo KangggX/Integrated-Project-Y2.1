@@ -16,17 +16,25 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// Adjustable Player UI components, must be dragged in from Inspector.
     /// </summary>
-    [Header("Player UI Settings")]
+    [Header("Player UI - Statistics")]
     public Slider healthSlider;
     public Slider staminaSlider;
+
+    [Header("Player UI - Crosshair")]
     public GameObject crosshairTextObject;
     public TextMeshProUGUI crosshairText;
+
+    [Header("Player UI - Quest")]
+    public TextMeshProUGUI questTitle;
+    public TextMeshProUGUI questDesc;
+
+    [Header("Player UI - Pause Menu")]
     public GameObject pauseUI;
 
     /// <summary>
     /// Adjustable Dialogue UI components, must be dragged in from Inspector.
     /// </summary>
-    [Header("Dialogue UI Settings")]
+    [Header("Dialogue UI")]
     public GameObject dialogueUI;
     public TextMeshProUGUI dialogueName;
     public TextMeshProUGUI dialogueSentence;

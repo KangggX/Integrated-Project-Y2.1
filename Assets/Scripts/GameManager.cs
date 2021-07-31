@@ -1,7 +1,7 @@
 /******************************************************************************
 Author: Kang Xuan
 Name of Class: GameManager
-Description of Class: Handles the overall game.
+Description of Class: Handles the overall game such as pausing.
 Date Created: 29/07/2021
 ******************************************************************************/
 
@@ -11,6 +11,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public UIManager UI;
+
     private bool isPaused;
 
     // Start is called before the first frame update
@@ -28,18 +30,42 @@ public class GameManager : MonoBehaviour
         {
             if (isPaused)
             {
-                //Debug.Log("Unpausing Game");
-                Time.timeScale = 1f;
-                isPaused = false;
-                uI.SetPauseUI(isPaused);
+                ResumeGame();
             }
             else
             {
-                //Debug.Log("Pausing Game");
-                Time.timeScale = 0f;
-                isPaused = true;
-                uI.SetPauseUI(isPaused);
+                PauseGame();
             }
         }
+    }
+
+    public void ResumeGame()
+    {
+        //Debug.Log("Resuming Game");
+        CursorLock();
+        Time.timeScale = 1f;
+        isPaused = false;
+        UI.SetPauseUI(isPaused);
+    }
+
+    public void PauseGame()
+    {
+        //Debug.Log("Pausing Game");
+        CursorUnlock();
+        Time.timeScale = 0f;
+        isPaused = true;
+        UI.SetPauseUI(isPaused);
+    }
+
+    public void CursorLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void CursorUnlock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
