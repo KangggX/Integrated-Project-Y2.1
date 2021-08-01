@@ -16,6 +16,9 @@ public class QuestManager : MonoBehaviour
     public Quest quest;
     public string[] sortedQuest;
 
+    public int curr;
+    public int req;
+
     private int currIndex;
     private string toSort;
     private void Start()
@@ -25,11 +28,11 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
-        if (sortedQuest[2] == sortedQuest[3])
+        if (curr == req)
         {
             StopAllCoroutines();
             StartCoroutine(QuestComplete());
-            sortedQuest[2] = "";
+            curr = 0; //Breaks the loop.
         }
     }
 
@@ -42,6 +45,8 @@ public class QuestManager : MonoBehaviour
         {
             toSort = quest.questList[currIndex];
             sortedQuest = toSort.Split(';');
+            curr = int.Parse(sortedQuest[2]);
+            req = int.Parse(sortedQuest[3]);
             ++currIndex;
         }
 
@@ -56,18 +61,18 @@ public class QuestManager : MonoBehaviour
     {
         if (all)
         {
-            StartCoroutine(TypewriterText(sortedQuest[0], $"{sortedQuest[1]}. {sortedQuest[2]}/{sortedQuest[3]}"));
+            StartCoroutine(TypewriterText(sortedQuest[0], $"{sortedQuest[1]}.", $"({sortedQuest[2]}/{sortedQuest[3]})"));
         }
         else
         {
-            StartCoroutine(TypewriterText("", $"{sortedQuest[1]}"));
+            StartCoroutine(TypewriterText("", "", "Completed!"));
         }
         
     }
 
     public void OnValueChange()
     {
-        uIManager.questDesc.text = $"{sortedQuest[1]}. {sortedQuest[2]}/{sortedQuest[3]}";
+        uIManager.questVal.text = $"({curr}/{req})";
     }
 
     /// <summary>
@@ -76,13 +81,14 @@ public class QuestManager : MonoBehaviour
     /// <param name="title"></param>
     /// <param name="desc"></param>
     /// <returns></returns>
-    IEnumerator TypewriterText(string title, string desc)
+    IEnumerator TypewriterText(string title, string desc, string val)
     {
-        if (title != "")
+        if (title != "" && desc != "")
         {
             uIManager.questTitle.text = "";
             uIManager.questDesc.text = "";
-            uIManager.questDesc.color = Color.white;
+            uIManager.questVal.text = "";
+            uIManager.questVal.color = Color.white;
 
             foreach (char letter in title.ToCharArray())
             {
@@ -97,15 +103,23 @@ public class QuestManager : MonoBehaviour
                 uIManager.questDesc.text += letter;
                 yield return new WaitForSeconds(0.03f);
             }
+
+            yield return new WaitForSeconds(0.5f);
+
+            foreach (char letter in val.ToCharArray())
+            {
+                uIManager.questVal.text += letter;
+                yield return new WaitForSeconds(0.03f);
+            }
         }
         else
         {
-            uIManager.questDesc.text = "";
-            uIManager.questDesc.color = Color.green;
+            uIManager.questVal.text = "";
+            uIManager.questVal.color = Color.green;
 
-            foreach (char letter in desc.ToCharArray())
+            foreach (char letter in val.ToCharArray())
             {
-                uIManager.questDesc.text += letter;
+                uIManager.questVal.text += letter;
                 yield return new WaitForSeconds(0.03f);
             }
         }
@@ -118,7 +132,6 @@ public class QuestManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator QuestComplete()
     {
-        sortedQuest[1] = "Completed!";
         UpdateUI(false);
 
         yield return new WaitForSeconds(3);

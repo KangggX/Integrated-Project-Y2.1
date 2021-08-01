@@ -27,9 +27,11 @@ public class UIManager : MonoBehaviour
     [Header("Player UI - Quest")]
     public TextMeshProUGUI questTitle;
     public TextMeshProUGUI questDesc;
+    public TextMeshProUGUI questVal;
 
     [Header("Player UI - Pause Menu")]
     public GameObject pauseUI;
+    public GameObject optionsUI;
 
     /// <summary>
     /// Adjustable Dialogue UI components, must be dragged in from Inspector.
@@ -101,5 +103,17 @@ public class UIManager : MonoBehaviour
         {
             pauseUI.SetActive(false);
         }
+    }
+
+    public void OpenOptions()
+    {
+        optionsUI.SetActive(true);
+        pauseUI.SetActive(false);
+    }
+
+    public void CloseOptions()
+    {
+        optionsUI.SetActive(false);
+        pauseUI.SetActive(true);
     }
 }
