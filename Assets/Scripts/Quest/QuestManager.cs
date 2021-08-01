@@ -18,59 +18,111 @@ public class QuestManager : MonoBehaviour
 
     private int currIndex;
     private string toSort;
-    private char[] separators = new char[] { ';' };
     private void Start()
     {
-        Debug.Log(quest.questList[0]);
-
         SortQuest();
     }
 
+    private void Update()
+    {
+        if (sortedQuest[2] == sortedQuest[3])
+        {
+            StopAllCoroutines();
+            StartCoroutine(QuestComplete());
+            sortedQuest[2] = "";
+        }
+    }
+
+    /// <summary>
+    /// Function that sorts the quests in the Quest class.
+    /// </summary>
     private void SortQuest()
     {
         if (currIndex <= quest.questList.Length)
         {
             toSort = quest.questList[currIndex];
-            sortedQuest = toSort.Split(separators);
+            sortedQuest = toSort.Split(';');
             ++currIndex;
-
-            UpdateUI(sortedQuest[0], sortedQuest[1], sortedQuest[2], sortedQuest[3]);
         }
+
+        UpdateUI(true);
     }
 
-    public void UpdateUI(string title, string objective, string currValue, string requiredValue)
+    /// <summary>
+    /// Function to update the UI in the UIManager with the appropriate wordings.
+    /// </summary>
+    /// <param name="all"></param>
+    public void UpdateUI(bool all)
     {
-        string desc = $"{objective}. {currValue}/{requiredValue}";
-        string[] text = { title, desc };
-
-        StartCoroutine(TypewriterText(text[0], text[1]));
-    }
-
-    private void TriggerNextQuest()
-    {
-        if (sortedQuest[2] == sortedQuest[3])
+        if (all)
         {
-            SortQuest();
+            StartCoroutine(TypewriterText(sortedQuest[0], $"{sortedQuest[1]}. {sortedQuest[2]}/{sortedQuest[3]}"));
         }
+        else
+        {
+            StartCoroutine(TypewriterText("", $"{sortedQuest[1]}"));
+        }
+        
     }
 
+    public void OnValueChange()
+    {
+        uIManager.questDesc.text = $"{sortedQuest[1]}. {sortedQuest[2]}/{sortedQuest[3]}";
+    }
+
+    /// <summary>
+    /// Show texts in a typewriter kind of effect instead of just popping out.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="desc"></param>
+    /// <returns></returns>
     IEnumerator TypewriterText(string title, string desc)
     {
-        uIManager.questTitle.text = "";
-        uIManager.questDesc.text = "";
-
-        foreach (char letter in title.ToCharArray())
+        if (title != "")
         {
-            uIManager.questTitle.text += letter;
-            yield return null;
+            uIManager.questTitle.text = "";
+            uIManager.questDesc.text = "";
+            uIManager.questDesc.color = Color.white;
+
+            foreach (char letter in title.ToCharArray())
+            {
+                uIManager.questTitle.text += letter;
+                yield return new WaitForSeconds(0.03f);
+            }
+
+            yield return new WaitForSeconds(1);
+
+            foreach (char letter in desc.ToCharArray())
+            {
+                uIManager.questDesc.text += letter;
+                yield return new WaitForSeconds(0.03f);
+            }
         }
-
-        yield return new WaitForSeconds(1);
-
-        foreach (char letter in desc.ToCharArray())
+        else
         {
-            uIManager.questDesc.text += letter;
-            yield return null;
+            uIManager.questDesc.text = "";
+            uIManager.questDesc.color = Color.green;
+
+            foreach (char letter in desc.ToCharArray())
+            {
+                uIManager.questDesc.text += letter;
+                yield return new WaitForSeconds(0.03f);
+            }
         }
+    }
+
+    /// <summary>
+    /// When quest is completed, this coroutine will run the UpdateUI function
+    /// and then display the next quest in line using the SortQuest function.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator QuestComplete()
+    {
+        sortedQuest[1] = "Completed!";
+        UpdateUI(false);
+
+        yield return new WaitForSeconds(3);
+
+        SortQuest();
     }
 }

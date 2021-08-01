@@ -39,6 +39,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CursorLock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void CursorUnlock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void ResumeGame()
     {
         //Debug.Log("Resuming Game");
@@ -57,15 +69,8 @@ public class GameManager : MonoBehaviour
         UI.SetPauseUI(isPaused);
     }
 
-    public void CursorLock()
+    public void QuitGame()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    public void CursorUnlock()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        Application.Quit();
     }
 }
