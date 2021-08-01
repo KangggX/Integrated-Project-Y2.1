@@ -67,7 +67,7 @@ public class PatrolAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Animator animator = gameObject.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         // Set the starting state as Idle
         nextState = "Idle";
@@ -141,19 +141,20 @@ public class PatrolAI : MonoBehaviour
         // Set the checkpoint that this AI should move towards
         agentComponent.SetDestination(checkpoints[currentCheckpoint].position);
         bool hasReached = false;
-        //animator.SetBool("isWalking", true);
+       
 
         while (currentState == "Patrolling")
         {
             // This while loop will contain the Patrolling behaviour
+            
 
             yield return null;
             if(!hasReached)
             {
                 // If agent has not reached destination, do the following code
+                animator.SetBool("isWalking", true);
 
-                
-                
+
                 // Check that the agent is at an acceptable stopping distance from the destination
                 if (agentComponent.remainingDistance <= agentComponent.stoppingDistance)
                 {
