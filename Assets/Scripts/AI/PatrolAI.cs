@@ -56,6 +56,8 @@ public class PatrolAI : MonoBehaviour
     /// </summary>
     private Transform playerToChase;
 
+    public Animator animator;
+
     private void Awake()
     {
         // Get the attached NavMeshAgent and store it in agentComponent
@@ -65,6 +67,8 @@ public class PatrolAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Animator animator = gameObject.GetComponent<Animator>();
+
         // Set the starting state as Idle
         nextState = "Idle";
     }
@@ -107,11 +111,16 @@ public class PatrolAI : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     IEnumerator Idle()
-    { 
-        while(currentState == "Idle")
+    {
+        //animator.SetBool("isWalking", false);
+        //animator.SetBool("isAttacking", false);
+
+        while (currentState == "Idle")
         {
             // This while loop will contain the Idle behaviour
 
+            
+            
             // The AI will wait for a few seconds before continuing.
             yield return new WaitForSeconds(idleTime);
 
@@ -132,8 +141,9 @@ public class PatrolAI : MonoBehaviour
         // Set the checkpoint that this AI should move towards
         agentComponent.SetDestination(checkpoints[currentCheckpoint].position);
         bool hasReached = false;
-        
-        while(currentState == "Patrolling")
+        //animator.SetBool("isWalking", true);
+
+        while (currentState == "Patrolling")
         {
             // This while loop will contain the Patrolling behaviour
 
@@ -141,8 +151,11 @@ public class PatrolAI : MonoBehaviour
             if(!hasReached)
             {
                 // If agent has not reached destination, do the following code
+
+                
+                
                 // Check that the agent is at an acceptable stopping distance from the destination
-                if(agentComponent.remainingDistance <= agentComponent.stoppingDistance)
+                if (agentComponent.remainingDistance <= agentComponent.stoppingDistance)
                 {
                     // We want to make sure this only happens once.
                     hasReached = true;

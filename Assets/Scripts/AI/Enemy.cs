@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     public float maxHealth;
     public Canvas HealthPrefab;
+    public float healthBarPosition;
 
     private float health;
     private Canvas theCanvas;
@@ -14,7 +15,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        theCanvas = Instantiate(HealthPrefab, gameObject.transform);
+        theCanvas = Instantiate(HealthPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + healthBarPosition, gameObject.transform.position.z), transform.rotation, gameObject.transform);
         healthBar = theCanvas.GetComponentInChildren<Slider>();
 
         health = maxHealth;
