@@ -4,8 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Interactable
   - Dialogue
+  - Manager
+  - Collectible
+  - Enemy
+  - Puzzle
   layers:
   - Default
   - TransparentFX

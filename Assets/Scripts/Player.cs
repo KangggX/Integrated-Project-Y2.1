@@ -1,11 +1,8 @@
 /******************************************************************************
 Author: Kang Xuan
-
 Name of Class: Player
-
 Description of Class: This class will control the movement and actions of a 
-                        player avatar based on user input.
-
+                      player avatar based on user input.
 Date Created: 23/07/2021
 ******************************************************************************/
 
@@ -20,12 +17,17 @@ public class Player : MonoBehaviour
     /// as well as the length of the raycast.
     /// </summary>
     [Header("Player Settings")]
+    public float damage;
     public float moveSpeed;
     public float moveSpeedMultiplier;
-    public float stamina;
+    public float maxHealth;
+    public float maxStamina;
     public float staminaRegen;
-    public int health;
+    public float staminaDeplete;
     public int raycastLength;
+
+    private float health;
+    private float stamina;
 
     /// <summary>
     /// The camera attached to the player model.
@@ -36,8 +38,11 @@ public class Player : MonoBehaviour
     public Camera playerCamera;
     public float rotationSpeed;
 
-    [Space(10)]
-    public HealthBar healthBar;
+    /// <summary>
+    /// UI Settings that must be dragged in from Inspector.
+    /// </summary>
+    [Header("Manager Settings")]
+    public UIManager uIManager;
 
     [HideInInspector]
     public bool inDialogue;
@@ -55,23 +60,35 @@ public class Player : MonoBehaviour
     private int storedRaycastLength;
     private float storedMoveSpeed;
     private float storedRotationSpeed;
+    private float storedMoveSpeedMultiplier;
 
     private void Awake()
     {
-        // To store the player default Raycast, MoveSpeed and RotationSpeed value.
+        // To store the player default Raycast, MoveSpeed, RotationSpeed, and MoveSpeedMultiplier value.
         storedRaycastLength = raycastLength;
         storedMoveSpeed = moveSpeed;
         storedRotationSpeed = rotationSpeed;
+        storedMoveSpeedMultiplier = moveSpeedMultiplier;
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        GameManager gameManager = FindObjectOfType<GameManager>();
 
+        // To ensure that the cursor is not visible when player is playing the game.
+        gameManager.CursorLock();
+
+        // So that player will start the game in the Idle state.
         nextState = "Idle";
-        healthBar.SetMaxHealth(health);
+
+        // Set the health and stamina of the player based on the max values of each variable.
+        health = maxHealth;
+        stamina = maxStamina;
+
+        // Set the UI of the max health and max stamina of the player.
+        uIManager.SetMaxHealth(health);
+        uIManager.SetMaxStamina(stamina);
     }
 
     // Update is called once per frame
@@ -82,8 +99,12 @@ public class Player : MonoBehaviour
             SwitchState();
         }
 
-        healthBar.SetHealth(health);
+        // Change the UI of the health and stamina over time based on their current values.
+        uIManager.SetHealth(health);
+        uIManager.SetStamina(stamina);
 
+        // Functions to check if player is rotating, sprinting or in a dialogue, 
+        // also handles the raycast every frame.
         CheckRotation();
         CheckSprint();
         CheckDialogue();
@@ -161,6 +182,7 @@ public class Player : MonoBehaviour
         {
             movementVector *= moveSpeed * moveSpeedMultiplier * Time.deltaTime;
             newPos += movementVector;
+            //Debug.Log(movementVector);
 
             transform.position = newPos;
             return true;
@@ -172,17 +194,20 @@ public class Player : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Checks whether the player is sprinting and perform the necessary value changes when player is sprinting.
+    /// </summary>
     private void CheckSprint()
     {
-        float multiplier = moveSpeedMultiplier;
-
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && stamina >= 0 && CheckMovement())
         {
-            moveSpeedMultiplier = multiplier;
+            moveSpeedMultiplier = storedMoveSpeedMultiplier;
+            StaminaDeplete();
         }
         else
         {
-            multiplier = 1;
+            moveSpeedMultiplier = 1;
+            StaminaReplenish();
         }
     }
 
@@ -224,14 +249,75 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, raycastLength, layerMask))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (hit.collider.CompareTag("Dialogue")) //If collider has a tag called "Dialogue"
             {
-                if (hit.collider.CompareTag("Dialogue"))
+                uIManager.SetCrosshairText(true, "Interact");
+
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     hit.transform.GetComponent<DialogueTrigger>().TriggerDialogue();
                     inDialogue = true;
                 }
             }
+            else if (hit.collider.CompareTag("Collectible")) //If collider has a tag called "Collectible"
+            {
+                uIManager.SetCrosshairText(true, "Collect");
+            }
+            else if (hit.collider.CompareTag("Puzzle")) //If collider has a tag called "Puzzle"
+            {
+                uIManager.SetCrosshairText(true, "Place puzzle piece");
+
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    hit.transform.GetComponent<PuzzlePiece>().PickUp();
+                }
+            }
+            else if (hit.collider.CompareTag("Enemy")) //If collider has a tag called "Enemy"
+            {
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    Attack(hit.collider.gameObject);
+                }
+            }
+        }
+        else
+        {
+            uIManager.SetCrosshairText(false, "");
+        }
+    }
+
+    private void Attack(GameObject enemy)
+    {
+        Debug.Log("Attack!");
+        enemy.GetComponent<Enemy>().TakeDamage();
+    }
+
+    /// <summary>
+    /// Function to replenish player's stamina
+    /// </summary>
+    private void StaminaReplenish()
+    {
+        if (stamina < maxStamina)
+        {
+            stamina += staminaRegen * Time.deltaTime;
+
+            if (stamina > maxStamina)
+            {
+                stamina = maxStamina;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Function to deplete the player's stamina
+    /// </summary>
+    private void StaminaDeplete()
+    {
+        stamina -= staminaDeplete * Time.deltaTime;
+
+        if (stamina < 0)
+        {
+            stamina = 0;
         }
     }
 }
