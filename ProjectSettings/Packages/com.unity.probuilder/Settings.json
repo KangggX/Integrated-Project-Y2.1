@@ -50,11 +50,6 @@
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                "key": "mesh.newShapesSnapToGrid",
-                "value": "{\"m_Value\":true}"
-            },
-            {
-                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "lightmapping.autoUnwrapLightmapUV",
                 "value": "{\"m_Value\":true}"
             },
@@ -64,6 +59,7 @@
                 "value": "{\"m_Value\":false}"
             },
             {
+<<<<<<< Updated upstream
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "mesh.meshColliderIsConvex",
                 "value": "{\"m_Value\":false}"
@@ -103,6 +99,8 @@
 >>>>>>> parent of 0124378... update changes to the layout
             },
             {
+=======
+>>>>>>> Stashed changes
                 "type": "UnityEngine.ProBuilder.SelectionModifierBehavior, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "editor.rectSelectModifier",
                 "value": "{\"m_Value\":2}"
@@ -115,6 +113,7 @@
             {
                 "type": "UnityEngine.ProBuilder.SelectMode, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "editor.selectMode",
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
                 "value": "{\"m_Value\":8}"
@@ -197,6 +196,9 @@
 =======
 >>>>>>> c46e08c278a50e4a1f25161ec30186ec84e2e72f
 >>>>>>> parent of 0124378... update changes to the layout
+=======
+                "value": "{\"m_Value\":1}"
+>>>>>>> Stashed changes
             }
         ]
     }
