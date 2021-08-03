@@ -77,6 +77,9 @@
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
 <<<<<<< HEAD
+                "key": "editor.extrudeEdgesAsGroup",
+=======
+<<<<<<< HEAD
                 "key": "SubdivideEdges.rangeExpanded",
                 "value": "{\"m_Value\":false}"
 =======
@@ -86,6 +89,7 @@
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "FillHole.selectEntirePath",
+>>>>>>> ccf32a03b897a468f2bb4ccb062bed3e29434e08
                 "value": "{\"m_Value\":true}"
 <<<<<<< HEAD
             },
@@ -115,6 +119,9 @@
                 "key": "editor.selectMode",
 <<<<<<< Updated upstream
 <<<<<<< HEAD
+                "value": "{\"m_Value\":1}"
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
                 "value": "{\"m_Value\":8}"
 =======
@@ -123,6 +130,7 @@
 =======
                 "value": "{\"m_Value\":4}"
 >>>>>>> parent of 17700fd... update
+>>>>>>> ccf32a03b897a468f2bb4ccb062bed3e29434e08
             },
             {
                 "type": "UnityEngine.ProBuilder.PivotLocation, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -162,6 +170,9 @@
             {
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ExtrudeFaces.distance",
+<<<<<<< HEAD
+                "value": "{\"m_Value\":2.869999885559082}"
+=======
                 "value": "{\"m_Value\":0.5}"
 <<<<<<< HEAD
             },
@@ -196,9 +207,13 @@
 =======
 >>>>>>> c46e08c278a50e4a1f25161ec30186ec84e2e72f
 >>>>>>> parent of 0124378... update changes to the layout
+<<<<<<< HEAD
 =======
                 "value": "{\"m_Value\":1}"
 >>>>>>> Stashed changes
+=======
+>>>>>>> ccf32a03b897a468f2bb4ccb062bed3e29434e08
+>>>>>>> 432f0e7cdf9c9c132218f506e7ae4e57a84b846e
             }
         ]
     }
