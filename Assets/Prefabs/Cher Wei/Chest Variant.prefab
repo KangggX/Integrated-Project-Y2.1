@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9186515663192805877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6784903830779459406}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6784903830779459406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9186515663192805877}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.000018361276, y: 0.03317, z: -0.15765}
+  m_LocalScale: {x: 0.30201086, y: 0.30201086, z: 0.30201086}
+  m_Children: []
+  m_Father: {fileID: 7832573768620456700}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7726027576347942167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77,7 +107,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2d30907c001dc2a42a2070978f2859f6, type: 2}
     - target: {fileID: 919132149155446097, guid: 3f7ee07a41aa5e644bf14a271b33de14, type: 3}
       propertyPath: m_Name
-      value: Chest
+      value: Chest Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1128009853963812683, guid: 3f7ee07a41aa5e644bf14a271b33de14, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -87,9 +117,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 7517bf77b62d03447a30df1b1b688f4e, type: 2}
+    - target: {fileID: 4962088892109693030, guid: 3f7ee07a41aa5e644bf14a271b33de14, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.033226
+      objectReference: {fileID: 0}
     - target: {fileID: 8898647429385010761, guid: 3f7ee07a41aa5e644bf14a271b33de14, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3bb90490536d9af4ba01a7efd07ccd0a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f7ee07a41aa5e644bf14a271b33de14, type: 3}
+--- !u!4 &7832573768620456700 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3f7ee07a41aa5e644bf14a271b33de14, type: 3}
+  m_PrefabInstance: {fileID: 7726027576347942167}
+  m_PrefabAsset: {fileID: 0}
