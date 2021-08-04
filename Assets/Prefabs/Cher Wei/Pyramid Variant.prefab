@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3bb90490536d9af4ba01a7efd07ccd0a, type: 2}
     - target: {fileID: 919132149155446097, guid: ccd58d34d0f2f7f4081d016fc69ec234, type: 3}
       propertyPath: m_Name
-      value: Pyramid
+      value: Pyramid Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2297296830642795458, guid: ccd58d34d0f2f7f4081d016fc69ec234, type: 3}
       propertyPath: m_Materials.Array.data[0]
