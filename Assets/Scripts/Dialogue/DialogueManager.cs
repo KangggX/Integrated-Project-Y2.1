@@ -90,5 +90,9 @@ public class DialogueManager : MonoBehaviour
             uIManager.dialogueSentence.text += letter;
             yield return null;
         }
+
+        yield return new WaitForSeconds(2);
+
+        DisplayNextSentence();
     }
 }

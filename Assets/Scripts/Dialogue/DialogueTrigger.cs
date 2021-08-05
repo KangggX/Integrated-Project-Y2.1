@@ -13,6 +13,17 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
 
+    private bool hasBeenTriggered;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!hasBeenTriggered)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            hasBeenTriggered = true;
+        }
+    }
+
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);

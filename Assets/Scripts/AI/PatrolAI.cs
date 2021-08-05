@@ -112,15 +112,13 @@ public class PatrolAI : MonoBehaviour
     /// <returns></returns>
     IEnumerator Idle()
     {
-        //animator.SetBool("isWalking", false);
-        //animator.SetBool("isAttacking", false);
-
         while (currentState == "Idle")
         {
             // This while loop will contain the Idle behaviour
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isAttacking", false);
 
-            
-            
+
             // The AI will wait for a few seconds before continuing.
             yield return new WaitForSeconds(idleTime);
 
@@ -152,7 +150,7 @@ public class PatrolAI : MonoBehaviour
             if(!hasReached)
             {
                 // If agent has not reached destination, do the following code
-                animator.SetBool("isWalking", true);
+                //animator.SetBool("isWalking", true);
 
 
                 // Check that the agent is at an acceptable stopping distance from the destination

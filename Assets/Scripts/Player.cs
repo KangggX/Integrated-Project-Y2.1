@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     /// as well as the length of the raycast.
     /// </summary>
     [Header("Player Settings")]
-    public float damage;
+    public int damage;
     public float moveSpeed;
     public float moveSpeedMultiplier;
     public float maxHealth;
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     /// </summary>
     [Header("Manager Settings")]
     public UIManager uIManager;
+    private GameManager gameManager;
 
     [HideInInspector]
     public bool inDialogue;
@@ -52,29 +53,12 @@ public class Player : MonoBehaviour
     /// </summary>
     private string currentState;
     private string nextState;
-
-    /// <summary>
-    /// Stored variables from the player class.
-    /// To be used to revert modifications made to these variables.
-    /// </summary>
-    private int storedRaycastLength;
-    private float storedMoveSpeed;
-    private float storedRotationSpeed;
     private float storedMoveSpeedMultiplier;
-
-    private void Awake()
-    {
-        // To store the player default Raycast, MoveSpeed, RotationSpeed, and MoveSpeedMultiplier value.
-        storedRaycastLength = raycastLength;
-        storedMoveSpeed = moveSpeed;
-        storedRotationSpeed = rotationSpeed;
-        storedMoveSpeedMultiplier = moveSpeedMultiplier;
-    }
 
     // Start is called before the first frame update
     private void Start()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
 
         // To ensure that the cursor is not visible when player is playing the game.
         gameManager.CursorLock();
@@ -89,6 +73,8 @@ public class Player : MonoBehaviour
         // Set the UI of the max health and max stamina of the player.
         uIManager.SetMaxHealth(health);
         uIManager.SetMaxStamina(stamina);
+
+        storedMoveSpeedMultiplier = moveSpeedMultiplier;
     }
 
     // Update is called once per frame
@@ -104,11 +90,17 @@ public class Player : MonoBehaviour
         uIManager.SetStamina(stamina);
 
         // Functions to check if player is rotating, sprinting or in a dialogue, 
-        // also handles the raycast every frame.
+        // also handles the raycast every frame etc.
         CheckRotation();
         CheckSprint();
+        CheckAlive();
         CheckDialogue();
         Raycast();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
     }
 
     /// <summary>
@@ -212,6 +204,18 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// Checks whether player health is below/equal to 0.
+    /// If the above is true, then player will die.
+    /// </summary>
+    private void CheckAlive()
+    {
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    /// <summary>
     /// To check if player is currently in a Dialogue.
     /// If true, player won't be able to move, rotate camera and interact with objects.
     /// If true and player press 'E', display next Dialogue sentence.
@@ -220,9 +224,7 @@ public class Player : MonoBehaviour
     {
         if (inDialogue)
         {
-            raycastLength = 0;
-            moveSpeed = 0;
-            rotationSpeed = 0;
+            gameManager.PlayerLock();
 
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -231,9 +233,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            raycastLength = storedRaycastLength;
-            moveSpeed = storedMoveSpeed;
-            rotationSpeed = storedRotationSpeed;
+            gameManager.PlayerUnlock();
         }
     }
 
@@ -289,7 +289,7 @@ public class Player : MonoBehaviour
     private void Attack(GameObject enemy)
     {
         Debug.Log("Attack!");
-        enemy.GetComponent<Enemy>().TakeDamage();
+        enemy.GetComponent<Enemy>().TakeDamage(damage);
     }
 
     /// <summary>
@@ -319,5 +319,10 @@ public class Player : MonoBehaviour
         {
             stamina = 0;
         }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Die");
     }
 }
