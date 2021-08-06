@@ -3099,7 +3099,7 @@ MonoBehaviour:
   maxHealth: 100
   HealthPrefab: {fileID: 4845308497483141546, guid: b817eba2756389d4ab79a41659c99563, type: 3}
   healthBarPosition: 2.1
-  damage: 0
+  damage: 10
 --- !u!114 &131255116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3134,7 +3134,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 131255114}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.15
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -38914,7 +38914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4feb7967c3b194f9ed897250fa396b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 10
   moveSpeed: 3
   moveSpeedMultiplier: 2
   maxHealth: 100
@@ -40855,7 +40855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 1650685578}
-  player: {fileID: 0}
+  player: {fileID: 810130069}
 --- !u!4 &1043273192
 Transform:
   m_ObjectHideFlags: 0
