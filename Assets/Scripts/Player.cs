@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         CheckRotation();
         CheckSprint();
         CheckAlive();
-        CheckDialogue();
+        //CheckDialogue();
         Raycast();
     }
 

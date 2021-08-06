@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         player.raycastLength = 0;
         player.moveSpeed = 0;
         player.rotationSpeed = 0;
+        Debug.Log(player.rotationSpeed);
     }
 
     /// <summary>

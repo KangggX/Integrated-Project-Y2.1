@@ -150,7 +150,7 @@ public class PatrolAI : MonoBehaviour
             if(!hasReached)
             {
                 // If agent has not reached destination, do the following code
-                //animator.SetBool("isWalking", true);
+                animator.SetBool("isWalking", true);
 
 
                 // Check that the agent is at an acceptable stopping distance from the destination
