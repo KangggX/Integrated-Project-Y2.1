@@ -265,11 +265,11 @@ public class Player : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Puzzle")) //If collider has a tag called "Puzzle"
             {
-                uIManager.SetCrosshairText(true, "Place puzzle piece");
+                uIManager.SetCrosshairText(true, "Rotate puzzle piece");
 
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    hit.transform.GetComponent<PuzzlePiece>().PickUp();
+                    hit.transform.GetComponent<PuzzlePiece>().RotatePiece();
                 }
             }
             else if (hit.collider.CompareTag("Enemy")) //If collider has a tag called "Enemy"
