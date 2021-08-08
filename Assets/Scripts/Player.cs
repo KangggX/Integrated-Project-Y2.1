@@ -196,7 +196,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void CheckSprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && stamina >= 0 && CheckMovement())
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && CheckMovement())
         {
             moveSpeedMultiplier = storedMoveSpeedMultiplier;
             StaminaDeplete();
