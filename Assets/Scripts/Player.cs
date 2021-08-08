@@ -22,12 +22,14 @@ public class Player : MonoBehaviour
     public float moveSpeedMultiplier;
     public float maxHealth;
     public float maxStamina;
-    public float staminaRegen;
-    public float staminaDeplete;
+    public float staminaRegenRate;
+    public float staminaDepleteRate;
+    public float staminaTimeToRegen;
     public int raycastLength;
 
     private float health;
     private float stamina;
+    private float staminaRegenTimer;
 
     /// <summary>
     /// The camera attached to the player model.
@@ -94,7 +96,6 @@ public class Player : MonoBehaviour
         CheckRotation();
         CheckSprint();
         CheckAlive();
-        //CheckDialogue();
         Raycast();
     }
 
@@ -245,11 +246,11 @@ public class Player : MonoBehaviour
         Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * raycastLength);
 
         RaycastHit hit;
-        int layerMask = 1 << 3; //LayerMask for "Interactable" layer
+        int layerMask = 1 << 3; // LayerMask for "Interactable" layer
 
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, raycastLength, layerMask))
         {
-            if (hit.collider.CompareTag("Dialogue")) //If collider has a tag called "Dialogue"
+            if (hit.collider.CompareTag("Dialogue")) // If collider has a tag called "Dialogue"
             {
                 uIManager.SetCrosshairText(true, "Interact");
 
@@ -259,11 +260,11 @@ public class Player : MonoBehaviour
                     inDialogue = true;
                 }
             }
-            else if (hit.collider.CompareTag("Collectible")) //If collider has a tag called "Collectible"
+            else if (hit.collider.CompareTag("Collectible")) // If collider has a tag called "Collectible"
             {
                 uIManager.SetCrosshairText(true, "Collect");
             }
-            else if (hit.collider.CompareTag("Puzzle")) //If collider has a tag called "Puzzle"
+            else if (hit.collider.CompareTag("Puzzle")) // If collider has a tag called "Puzzle"
             {
                 uIManager.SetCrosshairText(true, "Rotate puzzle piece");
 
@@ -272,7 +273,7 @@ public class Player : MonoBehaviour
                     hit.transform.GetComponent<PuzzlePiece>().RotatePiece();
                 }
             }
-            else if (hit.collider.CompareTag("Enemy")) //If collider has a tag called "Enemy"
+            else if (hit.collider.CompareTag("Enemy")) // If collider has a tag called "Enemy"
             {
                 if (Input.GetButtonDown("Fire1"))
                 {
@@ -282,7 +283,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            uIManager.SetCrosshairText(false, "");
+            uIManager.SetCrosshairText(false, ""); // Disables the text below crosshair
         }
     }
 
@@ -297,9 +298,12 @@ public class Player : MonoBehaviour
     /// </summary>
     private void StaminaReplenish()
     {
-        if (stamina < maxStamina)
+        // Increase the value per frame
+        staminaRegenTimer += Time.deltaTime;
+
+        if (stamina < maxStamina && staminaRegenTimer >= staminaTimeToRegen)
         {
-            stamina += staminaRegen * Time.deltaTime;
+            stamina += staminaRegenRate * Time.deltaTime;
 
             if (stamina > maxStamina)
             {
@@ -313,7 +317,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private void StaminaDeplete()
     {
-        stamina -= staminaDeplete * Time.deltaTime;
+        staminaRegenTimer = 0;
+        stamina -= staminaDepleteRate * Time.deltaTime;
 
         if (stamina < 0)
         {
