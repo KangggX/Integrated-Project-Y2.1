@@ -1,7 +1,7 @@
 /******************************************************************************
 Author: Elyas Chua-Aziz
-Name of Class: PatrolAI.cs
-Description of Class: Controls the behaviour of the patrolling AI.
+Name of Class: Anubis
+Description of Class: Controls the behaviour of the Anubis AI.
 Date Created: 17/07/21
 ******************************************************************************/
 
@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class PatrolAI : MonoBehaviour
+public class Anubis : MonoBehaviour
 {
     // Have an Idle and a Patrolling state
     // In Idle state, it will stand still for a few seconds, before changing to Patrolling
@@ -57,14 +57,23 @@ public class PatrolAI : MonoBehaviour
     /// </summary>
     private Transform playerToChase;
 
+    /// <summary>
+    /// These variables controls the maxinum health, as well as controlling
+    /// the healthbar position and the necessary prefab for the healthbar
+    /// </summary>
     public float maxHealth;
     public Canvas HealthPrefab;
     public float healthBarPosition;
+
+    
+
     public int damage;
 
     private float health;
     private bool playerInRange;
     private bool canAttack = true;
+    private bool isActivated;
+    private bool isEnraged;
     private Canvas theCanvas;
     private Slider healthBar;
     private Player player;
@@ -210,15 +219,15 @@ public class PatrolAI : MonoBehaviour
         // Set the checkpoint that this AI should move towards
         agentComponent.SetDestination(checkpoints[currentCheckpoint].position);
         bool hasReached = false;
-       
+
 
         while (currentState == "Patrolling")
         {
             // This while loop will contain the Patrolling behaviour
-            
+
 
             yield return null;
-            if(!hasReached)
+            if (!hasReached)
             {
                 // If agent has not reached destination, do the following code
                 animator.SetBool("isWalking", true);
@@ -234,7 +243,7 @@ public class PatrolAI : MonoBehaviour
                     ++currentCheckpoint;
 
                     // A check so that the index does not exceed the length of the checkpoints array
-                    if(currentCheckpoint >= checkpoints.Length)
+                    if (currentCheckpoint >= checkpoints.Length)
                     {
                         currentCheckpoint = 0;
                     }
@@ -255,11 +264,11 @@ public class PatrolAI : MonoBehaviour
         while (currentState == "ChasingPlayer")
         {
             // This while loop will contain the ChasingPlayer behaviour
-            
+
             yield return null;
-               
+
             // If there is a player to chase, keep chasing the player
-            if(playerToChase != null)
+            if (playerToChase != null)
             {
                 agentComponent.SetDestination(playerToChase.position);
 
@@ -274,7 +283,7 @@ public class PatrolAI : MonoBehaviour
                 }
             }
             // If not, move back to the Idle state
-            else 
+            else
             {
                 nextState = "Idle";
             }

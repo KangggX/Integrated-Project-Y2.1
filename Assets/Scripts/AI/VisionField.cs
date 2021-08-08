@@ -18,15 +18,38 @@ public class VisionField : MonoBehaviour
     /// Stores the AI that this VisionField should update
     /// </summary>
     [SerializeField]
-    private PatrolAI connectedAI;
+    private GameObject connectedAI;
+
+    private Mummy mummy;
+    private Anubis anubis;
+
+    private void Awake()
+    {
+        if (connectedAI.GetComponent<Mummy>() == null)
+        {
+            anubis = connectedAI.GetComponent<Anubis>();
+        }
+        else
+        {
+            mummy = connectedAI.GetComponent<Mummy>();
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         // tell AI to chase
         if(other.tag == "Player")
         {
-            // Passes the seen player to the AI via the SeePlayer function
-            connectedAI.SeePlayer(other.transform);
+            if (mummy == null)
+            {
+                // Passes the seen player to the AI via the SeePlayer function
+                anubis.SeePlayer(other.transform);
+            }
+            else
+            {
+                // Passes the seen player to the AI via the SeePlayer function
+                mummy.SeePlayer(other.transform);
+            }
         }
     }
 
@@ -35,8 +58,16 @@ public class VisionField : MonoBehaviour
         // tell AI to stop
         if (other.tag == "Player")
         {
-            // Tells the AI that the player was lost
-            connectedAI.LostPlayer();
+            if (mummy == null)
+            {
+                // Tells the AI that the player was lost
+                anubis.LostPlayer();
+            }
+            else
+            {
+                /// Tells the AI that the player was lost
+                mummy.LostPlayer();
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 /******************************************************************************
-Author: 
+Author: Rebecca
 Name of Class: SimpleSpawn
 Description of Class: Spawning of the enemy at different position
 Date Created: 05 Aug 2021
@@ -33,7 +33,7 @@ public class SimpleSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Spawn",startSpawnTime, spawnTime);
+        InvokeRepeating("Spawn", startSpawnTime, spawnTime);
     }
 
     // Update is called once per frame
