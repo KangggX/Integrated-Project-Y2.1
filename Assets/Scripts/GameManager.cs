@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private float storedMoveSpeed;
     private float storedRotationSpeed;
 
-    private void Start()
+    private void Awake()
     {
         // To store the player default Raycast, MoveSpeed, RotationSpeed, and MoveSpeedMultiplier value.
         storedRaycastLength = player.raycastLength;

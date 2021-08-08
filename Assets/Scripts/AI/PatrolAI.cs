@@ -18,16 +18,16 @@ public class PatrolAI : MonoBehaviour
     // After it reaches the checkpoint, go back to Idle state.
 
     /// <summary>
-    /// This stores the current state that the AI is in
+    /// This stores the current and next state of the AI
     /// </summary>
     public string currentState;
-
-    /// <summary>
-    /// This stores the next state that the AI should transition to
-    /// </summary>
     public string nextState;
 
+    /// <summary>
+    /// Adjustable variable for the AI movement speed and to store the movement speed
+    /// </summary>
     public float moveSpeed;
+    private float storedMoveSpeed;
 
     /// <summary>
     /// The time that the AI will idle for before patrolling
@@ -62,22 +62,29 @@ public class PatrolAI : MonoBehaviour
     {
         // Get the attached NavMeshAgent and store it in agentComponent
         agentComponent = GetComponent<NavMeshAgent>();
+
+        // Get the attached Animator and store it in animator
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-
         // Set the starting state as Idle
         nextState = "Idle";
+
+        // Stores the movement speed to storedMoveSpeed
+        storedMoveSpeed = moveSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Set the speed of the AI
+        agentComponent.speed = moveSpeed;
+
         // Check if the AI should change to a new state
-        if(nextState != currentState)
+        if (nextState != currentState)
         {
             // Stop the current running coroutine first before starting a new one.
             StopCoroutine(currentState);
@@ -118,6 +125,8 @@ public class PatrolAI : MonoBehaviour
             animator.SetBool("isWalking", false);
             animator.SetBool("isAttacking", false);
 
+            // To 100% ensure that the AI can't move (bugfix)
+            moveSpeed = 0;
 
             // The AI will wait for a few seconds before continuing.
             yield return new WaitForSeconds(idleTime);
@@ -133,8 +142,8 @@ public class PatrolAI : MonoBehaviour
     /// <returns></returns>
     IEnumerator Patrolling()
     {
-        // Set the speed of the AI
-        agentComponent.speed = moveSpeed;
+        // Change the movement speed back to its default value
+        moveSpeed = storedMoveSpeed;
 
         // Set the checkpoint that this AI should move towards
         agentComponent.SetDestination(checkpoints[currentCheckpoint].position);
@@ -151,7 +160,6 @@ public class PatrolAI : MonoBehaviour
             {
                 // If agent has not reached destination, do the following code
                 animator.SetBool("isWalking", true);
-
 
                 // Check that the agent is at an acceptable stopping distance from the destination
                 if (agentComponent.remainingDistance <= agentComponent.stoppingDistance)
@@ -179,22 +187,48 @@ public class PatrolAI : MonoBehaviour
     /// <returns></returns>
     IEnumerator ChasingPlayer()
     {
-        while(currentState == "ChasingPlayer")
+        // Change the movement speed back to its default value
+        moveSpeed = storedMoveSpeed;
+
+        while (currentState == "ChasingPlayer")
         {
             // This while loop will contain the ChasingPlayer behaviour
-
+            
             yield return null;
                
             // If there is a player to chase, keep chasing the player
             if(playerToChase != null)
             {
                 agentComponent.SetDestination(playerToChase.position);
+
+                if (agentComponent.remainingDistance > agentComponent.stoppingDistance)
+                {
+                    animator.SetBool("isWalking", true);
+                }
+                else if (agentComponent.remainingDistance <= agentComponent.stoppingDistance)
+                {
+                    Debug.Log("Hi");
+                    animator.SetBool("isWalking", false);
+                }
             }
             // If not, move back to the Idle state
             else 
             {
                 nextState = "Idle";
             }
+        }
+    }
+
+    IEnumerator Attacking()
+    {
+        while (currentState == "Attacking")
+        {
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isAttacking", true);
+
+            yield return null;
+
+            nextState = "ChasingPlayer";
         }
     }
 }

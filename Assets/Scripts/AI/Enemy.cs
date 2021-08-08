@@ -16,14 +16,21 @@ public class Enemy : MonoBehaviour
     private Canvas theCanvas;
     private Slider healthBar;
     private Player player;
+    private Animator animator;
+
+    private void Awake()
+    {
+        health = maxHealth;
+        animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
-        theCanvas = Instantiate(HealthPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + healthBarPosition, gameObject.transform.position.z), transform.rotation, gameObject.transform);
-        healthBar = theCanvas.GetComponentInChildren<Slider>();
+        // Find the player object
         player = FindObjectOfType<Player>();
 
-        health = maxHealth;
+        theCanvas = Instantiate(HealthPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + healthBarPosition, gameObject.transform.position.z), transform.rotation, gameObject.transform);
+        healthBar = theCanvas.GetComponentInChildren<Slider>();
         healthBar.maxValue = maxHealth;
         healthBar.value = health;
     }
@@ -39,7 +46,6 @@ public class Enemy : MonoBehaviour
 
         if (playerInRange && canAttack)
         {
-            player.TakeDamage(damage);
             StartCoroutine(AttackCooldown());
         }
     }
@@ -70,10 +76,12 @@ public class Enemy : MonoBehaviour
 
     IEnumerator AttackCooldown()
     {
+        animator.SetBool("isAttacking", true);
         canAttack = false;
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2.1f);
 
+        player.TakeDamage(damage);
         canAttack = true;
     }
 

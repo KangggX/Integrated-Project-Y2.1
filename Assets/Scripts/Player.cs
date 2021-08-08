@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     /// UI Settings that must be dragged in from Inspector.
     /// </summary>
     [Header("Manager Settings")]
-    public UIManager uIManager;
+    private UIManager uIManager;
     private GameManager gameManager;
 
     [HideInInspector]
@@ -57,26 +57,30 @@ public class Player : MonoBehaviour
     private string nextState;
     private float storedMoveSpeedMultiplier;
 
+    private void Awake()
+    {
+        // Set the health and stamina of the player based on the max values of each variable.
+        health = maxHealth;
+        stamina = maxStamina;
+
+        storedMoveSpeedMultiplier = moveSpeedMultiplier;
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        uIManager = FindObjectOfType<UIManager>();
 
         // To ensure that the cursor is not visible when player is playing the game.
         gameManager.CursorLock();
-
-        // So that player will start the game in the Idle state.
-        nextState = "Idle";
-
-        // Set the health and stamina of the player based on the max values of each variable.
-        health = maxHealth;
-        stamina = maxStamina;
 
         // Set the UI of the max health and max stamina of the player.
         uIManager.SetMaxHealth(health);
         uIManager.SetMaxStamina(stamina);
 
-        storedMoveSpeedMultiplier = moveSpeedMultiplier;
+        // So that player will start the game in the Idle state.
+        nextState = "Idle";
     }
 
     // Update is called once per frame
