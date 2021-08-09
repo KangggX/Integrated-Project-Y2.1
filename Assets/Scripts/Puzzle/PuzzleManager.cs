@@ -1,23 +1,29 @@
+/******************************************************************************
+Author: Kang Xuan
+Name of Class: PuzzleManager
+Description of Class: Manages the puzzle system such as checking whether or not the puzzle is solved
+Date Created: 03/08/2021
+******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-    public Transform[] puzzleArray;
-
-    public int curr;
+    public PuzzlePiece[] puzzleArray;
     public bool[] stateChecker = new bool[4];
 
-    private void Start()
+    private void Awake()
     {
+        puzzleArray = GetComponentsInChildren<PuzzlePiece>();
     }
 
     private void Update()
     {
         for (int i = 0; i < puzzleArray.Length; ++i)
         {
-            if (puzzleArray[i].eulerAngles.z == 0)
+            if (puzzleArray[i].transform.eulerAngles.z == 0)
             {
                 stateChecker[i] = true;
             }

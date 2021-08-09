@@ -32,6 +32,13 @@ public class Player : MonoBehaviour
     private float staminaRegenTimer;
 
     /// <summary>
+    /// Player inventory settings, mainly for the Hand Torch and Weapon
+    /// </summary>
+    [Header("Player Inventory")]
+    public GameObject handTorch;
+    public GameObject weapon;
+
+    /// <summary>
     /// The camera attached to the player model.
     /// Should be dragged in from Inspector.
     /// Settings can be played around.
@@ -95,11 +102,13 @@ public class Player : MonoBehaviour
         uIManager.SetHealth(health);
         uIManager.SetStamina(stamina);
 
-        // Functions to check if player is rotating, sprinting or in a dialogue, 
-        // also handles the raycast every frame etc.
+        // Functions to check if player is rotating, sprinting or in a dialogue
         CheckRotation();
         CheckSprint();
         CheckAlive();
+        CheckWeapon();
+
+        // Handles the raycast of the player
         Raycast();
     }
 
@@ -217,6 +226,17 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             Die();
+        }
+    }
+
+    /// <summary>
+    /// Checks if the weapon is active
+    /// </summary>
+    private void CheckWeapon()
+    {
+        if (weapon.activeInHierarchy)
+        {
+            damage = 20;
         }
     }
 

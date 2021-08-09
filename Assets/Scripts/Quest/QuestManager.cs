@@ -14,13 +14,24 @@ public class QuestManager : MonoBehaviour
 {
     public UIManager uIManager;
     public Quest quest;
-    public string[] sortedQuest;
 
+    /// <summary>
+    /// The current and required value of the Quest
+    /// </summary>
     public int curr;
     public int req;
 
+    /// <summary>
+    /// Current index
+    /// </summary>
     private int currIndex;
+
+    /// <summary>
+    /// Stores the string that is to be sorted
+    /// Stores the sorted string in an array that has been split apart
+    /// </summary>
     private string toSort;
+    private string[] sortedQuest;
     private void Start()
     {
         SortQuest();
@@ -28,7 +39,7 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
-        if (curr == req)
+        if (curr == req) // If current value is equals to the required value, do this
         {
             StopAllCoroutines();
             StartCoroutine(QuestComplete());
@@ -44,10 +55,10 @@ public class QuestManager : MonoBehaviour
         if (currIndex <= quest.questList.Length)
         {
             toSort = quest.questList[currIndex];
-            sortedQuest = toSort.Split(';');
+            sortedQuest = toSort.Split(';'); // Splits the string with ';' being the separator
             curr = int.Parse(sortedQuest[2]);
             req = int.Parse(sortedQuest[3]);
-            ++currIndex;
+            ++currIndex; // Increment current index by 1
         }
 
         UpdateUI(true);
@@ -70,8 +81,13 @@ public class QuestManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// This updates the QuestUI (weird method, can't think of a better way to do it)
+    /// Also increments the current value which is then checked by the Update() function
+    /// </summary>
     public void OnValueChange()
     {
+        ++curr;
         uIManager.questVal.text = $"({curr}/{req})";
     }
 
