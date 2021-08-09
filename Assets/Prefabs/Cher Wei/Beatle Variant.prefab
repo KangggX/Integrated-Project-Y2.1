@@ -19,6 +19,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2330611651568197828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750620302659689012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2422cffb5cdeb6445a34d72f81b2b752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &1485884056128246216
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750620302659689012}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.0655844
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.1320492
+  m_BaseOffset: 0.0660246
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &3093202488611776357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32,15 +66,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d89ffcef193f1e143991c4ac722136f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9366431
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d89ffcef193f1e143991c4ac722136f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09447786
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d89ffcef193f1e143991c4ac722136f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.139815
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d89ffcef193f1e143991c4ac722136f5, type: 3}
       propertyPath: m_LocalRotation.w

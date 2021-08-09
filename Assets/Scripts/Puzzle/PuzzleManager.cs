@@ -11,19 +11,37 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
+    /// <summary>
+    /// Arrays to store the puzzle pieces in the object and the state of its completion
+    /// </summary>
     public PuzzlePiece[] puzzleArray;
     public bool[] stateChecker = new bool[4];
+
+    /// <summary>
+    /// Door variable, to be dragged in from Inspector
+    /// </summary>
+    public Door door;
+
+    /// <summary>
+    /// Variable for the QuestManager class, to be intialized in the Start() function
+    /// </summary>
+    private QuestManager questManager;
 
     private void Awake()
     {
         puzzleArray = GetComponentsInChildren<PuzzlePiece>();
     }
 
+    private void Start()
+    {
+        questManager = FindObjectOfType<QuestManager>();
+    }
+
     private void Update()
     {
         for (int i = 0; i < puzzleArray.Length; ++i)
         {
-            if (puzzleArray[i].transform.eulerAngles.z == 0)
+            if (puzzleArray[i].transform.eulerAngles.x == 0)
             {
                 stateChecker[i] = true;
             }
@@ -42,5 +60,7 @@ public class PuzzleManager : MonoBehaviour
     private void Complete()
     {
         Debug.Log("Puzzle completed");
+        questManager.OnValueChange();
+        door.Open();
     }
 }

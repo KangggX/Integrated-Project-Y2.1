@@ -13,10 +13,14 @@ public class PuzzlePiece : MonoBehaviour
 {
     private QuestManager questManager;
 
+    private void Awake()
+    {
+        gameObject.transform.Rotate(Random.Range(0, 4) * 90, 0, 0);
+    }
+
     private void Start()
     {
         questManager = FindObjectOfType<QuestManager>();
-        gameObject.transform.Rotate(Random.Range(0, 4) * 90, 0, 0);
     }
 
     public void PickUp()

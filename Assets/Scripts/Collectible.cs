@@ -1,3 +1,11 @@
+/******************************************************************************
+Author: Kang Xuan
+Name of Class: Collectible
+Description of Class: To be placed in each collectibles, mainly the Hand Torch and the Weapon.
+                      Updates the Quest and Player stats (if applicable) when picked up
+Date Created: 09/08/2021
+******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
