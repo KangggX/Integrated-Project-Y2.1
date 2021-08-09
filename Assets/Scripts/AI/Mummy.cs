@@ -87,6 +87,9 @@ public class Mummy : MonoBehaviour
         animator = GetComponent<Animator>();
 
         health = maxHealth;
+
+        // Stores the movement speed to storedMoveSpeed
+        storedMoveSpeed = moveSpeed;
     }
 
     // Start is called before the first frame update
@@ -94,9 +97,6 @@ public class Mummy : MonoBehaviour
     {
         // Set the starting state as Idle
         nextState = "Idle";
-
-        // Stores the movement speed to storedMoveSpeed
-        storedMoveSpeed = moveSpeed;
 
         // Find the player object
         player = FindObjectOfType<Player>();

@@ -1,5 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &456192289566402878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676462341666055057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15269457, y: 0.5410976, z: 0.020770077}
+  m_Center: {x: -0.03587464, y: 0.061401457, z: -0.00000028824434}
+--- !u!114 &5220693374790201897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676462341666055057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ed3a7fe1356ed4a8d0d013b2f6eb85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5487434286454939328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57,7 +82,20 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 73de1064905a41d49820e582cb778d95, type: 2}
     - target: {fileID: 919132149155446097, guid: 8f5e8ebd77d603f4fa61031b33037773, type: 3}
       propertyPath: m_Name
-      value: Staff
+      value: Staff Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8f5e8ebd77d603f4fa61031b33037773, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8f5e8ebd77d603f4fa61031b33037773, type: 3}
+      propertyPath: m_TagString
+      value: Collectible
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f5e8ebd77d603f4fa61031b33037773, type: 3}
+--- !u!1 &4676462341666055057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8f5e8ebd77d603f4fa61031b33037773, type: 3}
+  m_PrefabInstance: {fileID: 5487434286454939328}
+  m_PrefabAsset: {fileID: 0}

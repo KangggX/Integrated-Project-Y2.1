@@ -70,7 +70,7 @@ public class Anubis : MonoBehaviour
     public int damage;
 
     private float health;
-    private bool playerInRange;
+    public bool playerInRange;
     private bool canAttack = true;
     private bool isActivated;
     private bool isEnraged;
@@ -88,6 +88,9 @@ public class Anubis : MonoBehaviour
         animator = GetComponent<Animator>();
 
         health = maxHealth;
+
+        // Stores the movement speed to storedMoveSpeed
+        storedMoveSpeed = moveSpeed;
     }
 
     // Start is called before the first frame update
@@ -95,9 +98,6 @@ public class Anubis : MonoBehaviour
     {
         // Set the starting state as Idle
         nextState = "Idle";
-
-        // Stores the movement speed to storedMoveSpeed
-        storedMoveSpeed = moveSpeed;
 
         // Find the player object
         player = FindObjectOfType<Player>();
@@ -115,7 +115,13 @@ public class Anubis : MonoBehaviour
 
         if (health <= 0)
         {
-            gameObject.GetComponent<PatrolAI>().nextState = "Die";
+            nextState = "Die";
+        }
+
+        if (health <= 180 && !isEnraged)
+        {
+            isEnraged = true;
+            nextState = "Enraged";
         }
 
         if (playerInRange && canAttack)
@@ -165,22 +171,6 @@ public class Anubis : MonoBehaviour
         if (health > 0)
         {
             health -= damage;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            playerInRange = false;
         }
     }
 
@@ -290,6 +280,19 @@ public class Anubis : MonoBehaviour
         }
     }
 
+    IEnumerator Enraged()
+    {
+        while (currentState == "Enraged")
+        {
+            animator.SetBool("isEnraged", true);
+            animator.SetTrigger("isActivated");
+
+            yield return new WaitForSeconds(3.5f);
+
+            nextState = "Idle";
+        }
+    }
+
     IEnumerator Die()
     {
         while (currentState == "Die")
@@ -307,11 +310,13 @@ public class Anubis : MonoBehaviour
     IEnumerator AttackCooldown()
     {
         animator.SetBool("isAttacking", true);
+        moveSpeed = 0;
         canAttack = false;
 
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(1.1f);
 
         player.TakeDamage(damage);
+        moveSpeed = storedMoveSpeed;
         canAttack = true;
     }
 }

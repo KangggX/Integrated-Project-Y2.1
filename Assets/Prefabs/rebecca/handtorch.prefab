@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 6065109354105665276}
   - component: {fileID: 7511705310056257125}
   - component: {fileID: 5797644067801277879}
-  m_Layer: 0
+  - component: {fileID: 3884531124070152316}
+  - component: {fileID: 3980866886168379609}
+  m_Layer: 3
   m_Name: handtorch
-  m_TagString: Untagged
+  m_TagString: Collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,3 +83,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3884531124070152316
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142962106257714869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.24905138, y: 0.3286087, z: 0.2600111}
+  m_Center: {x: -0.000000007450581, y: 0, z: 0}
+--- !u!114 &3980866886168379609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142962106257714869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ed3a7fe1356ed4a8d0d013b2f6eb85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

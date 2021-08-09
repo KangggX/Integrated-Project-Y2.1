@@ -256,7 +256,7 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.CompareTag("Dialogue")) // If collider has a tag called "Dialogue"
             {
-                uIManager.SetCrosshairText(true, "Interact");
+                uIManager.SetCrosshairText(true, "Interact", 1);
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -266,11 +266,16 @@ public class Player : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Collectible")) // If collider has a tag called "Collectible"
             {
-                uIManager.SetCrosshairText(true, "Collect");
+                uIManager.SetCrosshairText(true, "Collect", 1);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    hit.collider.GetComponent<Collectible>().PickUp();
+                }
             }
             else if (hit.collider.CompareTag("Puzzle")) // If collider has a tag called "Puzzle"
             {
-                uIManager.SetCrosshairText(true, "Rotate puzzle piece");
+                uIManager.SetCrosshairText(true, "Rotate puzzle piece", 2);
 
                 if (Input.GetButtonDown("Fire1"))
                 {
@@ -279,6 +284,8 @@ public class Player : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Enemy")) // If collider has a tag called "Enemy"
             {
+                uIManager.SetCrosshairText(true, "Attack", 2);
+
                 if (Input.GetButtonDown("Fire1"))
                 {
                     Attack(hit.collider.gameObject);
@@ -287,7 +294,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            uIManager.SetCrosshairText(false, ""); // Disables the text below crosshair
+            uIManager.SetCrosshairText(false, "", 0); // Disables the text below crosshair
         }
     }
 

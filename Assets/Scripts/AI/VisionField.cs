@@ -18,20 +18,20 @@ public class VisionField : MonoBehaviour
     /// Stores the AI that this VisionField should update
     /// </summary>
     [SerializeField]
-    private GameObject connectedAI;
+    private GameObject[] connectedAI;
 
     private Mummy mummy;
     private Anubis anubis;
 
     private void Awake()
     {
-        if (connectedAI.GetComponent<Mummy>() == null)
+        if (connectedAI[0].GetComponent<Mummy>() == null)
         {
-            anubis = connectedAI.GetComponent<Anubis>();
+            anubis = connectedAI[0].GetComponent<Anubis>();
         }
         else
         {
-            mummy = connectedAI.GetComponent<Mummy>();
+            mummy = connectedAI[0].GetComponent<Mummy>();
         }
     }
 
@@ -43,12 +43,22 @@ public class VisionField : MonoBehaviour
             if (mummy == null)
             {
                 // Passes the seen player to the AI via the SeePlayer function
-                anubis.SeePlayer(other.transform);
+                //anubis.SeePlayer(other.transform);
+
+                foreach (GameObject i in connectedAI)
+                {
+                    i.GetComponent<Anubis>().SeePlayer(other.transform);
+                }
             }
             else
             {
                 // Passes the seen player to the AI via the SeePlayer function
-                mummy.SeePlayer(other.transform);
+                //mummy.SeePlayer(other.transform);
+
+                foreach (GameObject i in connectedAI)
+                {
+                    i.GetComponent<Mummy>().SeePlayer(other.transform);
+                }
             }
         }
     }
@@ -61,12 +71,22 @@ public class VisionField : MonoBehaviour
             if (mummy == null)
             {
                 // Tells the AI that the player was lost
-                anubis.LostPlayer();
+                //anubis.LostPlayer();
+
+                foreach (GameObject i in connectedAI)
+                {
+                    i.GetComponent<Anubis>().LostPlayer();
+                }
             }
             else
             {
                 /// Tells the AI that the player was lost
-                mummy.LostPlayer();
+                //mummy.LostPlayer();
+
+                foreach (GameObject i in connectedAI)
+                {
+                    i.GetComponent<Mummy>().LostPlayer();
+                }
             }
         }
     }

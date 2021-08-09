@@ -1,3 +1,10 @@
+/******************************************************************************
+Author: Kang Xuan
+Name of Class: Teleporter
+Description of Class: Teleports the player to a specified location when triggered
+Date Created: 29/07/2021
+******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

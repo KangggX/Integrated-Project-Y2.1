@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Player UI - Crosshair")]
     public GameObject crosshairTextObject;
+    public GameObject crosshairIcon1;
+    public GameObject crosshairIcon2;
     public TextMeshProUGUI crosshairText;
 
     [Header("Player UI - Quest")]
@@ -78,18 +80,29 @@ public class UIManager : MonoBehaviour
     /// </summary>
     /// <param name="state"></param>
     /// <param name="text"></param>
-    public void SetCrosshairText(bool state, string text)
+    public void SetCrosshairText(bool state, string text, int type)
     {
         if (state)
         {
             crosshairTextObject.SetActive(true);
             crosshairText.text = text;
-            //crosshairText.alpha = 255;
+
+            if (type == 1)
+            {
+                crosshairIcon1.SetActive(true);
+                crosshairIcon2.SetActive(false);
+            }
+            else if (type == 2)
+            {
+                crosshairIcon1.SetActive(false);
+                crosshairIcon2.SetActive(true);
+            }
         }
         else
         {
             crosshairTextObject.SetActive(false);
-            //crosshairText.alpha = 0;
+            crosshairIcon1.SetActive(false);
+            crosshairIcon2.SetActive(false);
         }
     }
 
