@@ -109,4 +109,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598397aabf87fcb42a6a61562efd6382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyedFloor: {fileID: 4288996294772822086, guid: 05ca7783bc48f7f41a57d9a45b46aa24, type: 3}
+  destroyedFloor: {fileID: 3433920347194747082, guid: 085bc24f4a06dc3479d2ebe7a3c2b135, type: 3}

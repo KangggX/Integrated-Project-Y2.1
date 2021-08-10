@@ -40,7 +40,7 @@ public class Destructiblefloor : MonoBehaviour
     /// <returns></returns>
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         Instantiate(destroyedFloor, transform.position, transform.rotation);
         Destroy(gameObject);

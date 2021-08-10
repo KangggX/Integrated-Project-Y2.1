@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [Header("Player Settings")]
     public int damage;
     public float moveSpeed;
+    public float storedMoveSpeed;
     public float moveSpeedMultiplier;
     public float maxHealth;
     public float maxStamina;
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour
         health = maxHealth;
         stamina = maxStamina;
 
+        storedMoveSpeed = moveSpeed;
         storedMoveSpeedMultiplier = moveSpeedMultiplier;
     }
 

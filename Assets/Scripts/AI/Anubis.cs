@@ -262,15 +262,18 @@ public class Anubis : MonoBehaviour
             {
                 agentComponent.SetDestination(playerToChase.position);
 
-                if (agentComponent.remainingDistance > agentComponent.stoppingDistance)
+                if (playerInRange)
+                {
+                    animator.SetBool("isWalking", false);
+                    moveSpeed = 0;
+                }
+                else
                 {
                     animator.SetBool("isWalking", true);
+                    moveSpeed = storedMoveSpeed;
                 }
-                else if (agentComponent.remainingDistance <= agentComponent.stoppingDistance)
-                {
-                    Debug.Log("Hi");
-                    animator.SetBool("isWalking", false);
-                }
+
+                
             }
             // If not, move back to the Idle state
             else
@@ -309,14 +312,40 @@ public class Anubis : MonoBehaviour
 
     IEnumerator AttackCooldown()
     {
-        animator.SetBool("isAttacking", true);
-        moveSpeed = 0;
-        canAttack = false;
+        if (!isEnraged)
+        {
+            animator.SetBool("isAttacking", true);
+            moveSpeed = 0;
+            canAttack = false;
 
-        yield return new WaitForSeconds(1.1f);
+            yield return new WaitForSeconds(1.03f);
 
-        player.TakeDamage(damage);
-        moveSpeed = storedMoveSpeed;
-        canAttack = true;
+            player.TakeDamage(damage);
+            animator.SetBool("isAttacking", false);
+
+            yield return new WaitForSeconds(2f);
+            moveSpeed = storedMoveSpeed;
+            canAttack = true;
+        }
+        else
+        {
+            animator.SetBool("isAttacking", true);
+            moveSpeed = 0; // Make it stay still while attacking
+            canAttack = false;
+
+            yield return new WaitForSeconds(1.25f);
+
+            player.TakeDamage(damage);
+            player.moveSpeed = 0; // Stun the player
+
+            yield return new WaitForSeconds(1.5f);
+
+            player.moveSpeed = player.storedMoveSpeed;
+
+            yield return new WaitForSeconds(1.5f);
+
+            moveSpeed = storedMoveSpeed;
+            canAttack = true;
+        }
     }
 }
