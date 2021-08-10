@@ -18,6 +18,7 @@ public class Collectible : MonoBehaviour
     /// </summary>
     private Player player;
     private QuestManager questManager;
+    private BeatleSpawner beatleSpawner;
 
     /// <summary>
     /// The item type of THIS collectible, either handTorch or weapon
@@ -33,6 +34,7 @@ public class Collectible : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         questManager = FindObjectOfType<QuestManager>();
+        beatleSpawner = FindObjectOfType<BeatleSpawner>();
     }
 
     public void PickUp()
@@ -44,6 +46,10 @@ public class Collectible : MonoBehaviour
         else if (itemType == "weapon")
         {
             player.weapon.SetActive(true);
+        }
+        else if (itemType == "jewel")
+        {
+            beatleSpawner.isActivated = true;
         }
 
         questManager.OnValueChange();

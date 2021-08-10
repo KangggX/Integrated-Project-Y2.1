@@ -62,6 +62,7 @@ public class Beatle : MonoBehaviour
 
         // Find the player object
         player = FindObjectOfType<Player>();
+        playerToChase = player.transform;
     }
 
     private void Update()
@@ -126,9 +127,6 @@ public class Beatle : MonoBehaviour
     /// <returns></returns>
     IEnumerator ChasingPlayer()
     {
-        // Change the movement speed back to its default value
-        moveSpeed = storedMoveSpeed;
-
         while (currentState == "ChasingPlayer")
         {
             // This while loop will contain the ChasingPlayer behaviour

@@ -41,8 +41,10 @@ public class PuzzleManager : MonoBehaviour
     {
         for (int i = 0; i < puzzleArray.Length; ++i)
         {
-            if (puzzleArray[i].transform.eulerAngles.x == 0)
+            if (Mathf.Approximately(puzzleArray[i].transform.localEulerAngles.x, 0))
             {
+                //Debug.Log(i);
+                //Debug.Log(puzzleArray[i].transform.localEulerAngles.x);
                 stateChecker[i] = true;
             }
             else

@@ -11,15 +11,27 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    public Player player;
+    /// <summary>
+    /// The Transform of the GameObject where the player will teleport to
+    /// </summary>
     public Transform teleportTarget;
+
+    /// <summary>
+    /// The Animator of the FadeIn and FadeOut effect
+    /// </summary>
     public Animator transition;
 
+    /// <summary>
+    /// GameManager and Player variable
+    /// To be initialized in Start() function using FindObjectOfType<>()
+    /// </summary>
     private GameManager gameManager;
+    private Player player;
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        player = FindObjectOfType<Player>();
     }
 
     private void OnTriggerEnter(Collider other)

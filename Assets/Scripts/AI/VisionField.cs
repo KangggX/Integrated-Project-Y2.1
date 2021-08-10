@@ -45,9 +45,12 @@ public class VisionField : MonoBehaviour
                 // Passes the seen player to the AI via the SeePlayer function
                 //anubis.SeePlayer(other.transform);
 
-                foreach (GameObject i in connectedAI)
+                if (connectedAI != null) // To check if the array is empty or not
                 {
-                    i.GetComponent<Anubis>().SeePlayer(other.transform);
+                    foreach (GameObject i in connectedAI)
+                    {
+                        i.GetComponent<Anubis>().SeePlayer(other.transform);
+                    }
                 }
             }
             else
@@ -55,10 +58,14 @@ public class VisionField : MonoBehaviour
                 // Passes the seen player to the AI via the SeePlayer function
                 //mummy.SeePlayer(other.transform);
 
-                foreach (GameObject i in connectedAI)
+                if (connectedAI != null) // To check if the array is empty or not
                 {
-                    i.GetComponent<Mummy>().SeePlayer(other.transform);
+                    foreach (GameObject i in connectedAI)
+                    {
+                        i.GetComponent<Mummy>().SeePlayer(other.transform);
+                    }
                 }
+                    
             }
         }
     }

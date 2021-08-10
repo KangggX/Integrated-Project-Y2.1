@@ -112,6 +112,11 @@ public class Player : MonoBehaviour
         Raycast();
     }
 
+    public void Rotation(float speed)
+    {
+        rotationSpeed = speed;
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
