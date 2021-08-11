@@ -107,19 +107,27 @@ public class Player : MonoBehaviour
 
         // Functions to check if player is rotating, sprinting or in a dialogue
         CheckRotation();
+        CheckHealth();
         CheckSprint();
-        CheckAlive();
         CheckWeapon();
 
         // Handles the raycast of the player
         Raycast();
     }
 
+    /// <summary>
+    /// Public function to enable player to adjust rotation in settings
+    /// </summary>
+    /// <param name="speed"></param>
     public void Rotation(float speed)
     {
         rotationSpeed = speed;
     }
 
+    /// <summary>
+    /// Function called from AIs to deal damage to player
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -161,6 +169,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks the player rotation based on Mouse Axis input
+    /// </summary>
     private void CheckRotation()
     {
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
@@ -209,6 +220,17 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// Checks the player health in the Update() function
+    /// </summary>
+    private void CheckHealth()
+    {
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    /// <summary>
     /// Checks whether the player is sprinting and perform the necessary value changes when player is sprinting.
     /// </summary>
     private void CheckSprint()
@@ -222,18 +244,6 @@ public class Player : MonoBehaviour
         {
             moveSpeedMultiplier = 1;
             StaminaReplenish();
-        }
-    }
-
-    /// <summary>
-    /// Checks whether player health is below/equal to 0.
-    /// If the above is true, then player will die.
-    /// </summary>
-    private void CheckAlive()
-    {
-        if (health <= 0)
-        {
-            Die();
         }
     }
 
@@ -344,6 +354,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function used to deal damage to any enemy AI
+    /// </summary>
+    /// <param name="enemy"></param>
     private void Attack(GameObject enemy)
     {
         Debug.Log("Attack!");

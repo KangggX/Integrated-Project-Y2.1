@@ -58,6 +58,11 @@ public class Anubis : MonoBehaviour
     private Transform playerToChase;
 
     /// <summary>
+    /// Boolean to check if Player is within the AI's attack range
+    /// </summary>
+    public bool playerInRange;
+
+    /// <summary>
     /// These variables controls the maxinum health, as well as controlling
     /// the healthbar position and the necessary prefab for the healthbar
     /// </summary>
@@ -65,15 +70,22 @@ public class Anubis : MonoBehaviour
     public Canvas HealthPrefab;
     public float healthBarPosition;
 
-    
-
+    /// <summary>
+    /// Damage and Health of the AI
+    /// </summary>
     public int damage;
-
     private float health;
-    public bool playerInRange;
+    
+    /// <summary>
+    /// Booleans to check is AI can attack or not, whether it is activated and whether it is engraged
+    /// </summary>
     private bool canAttack = true;
     private bool isActivated;
     private bool isEnraged;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private Canvas theCanvas;
     private Slider healthBar;
     private Player player;
@@ -368,6 +380,7 @@ public class Anubis : MonoBehaviour
             animator.SetBool("isWalking", false);
             animator.SetBool("isAttacking", false);
             animator.SetTrigger("isDead");
+            
 
             yield return new WaitForSeconds(4);
 
