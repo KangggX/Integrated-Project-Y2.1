@@ -41,10 +41,8 @@ public class PuzzleManager : MonoBehaviour
     {
         for (int i = 0; i < puzzleArray.Length; ++i)
         {
-            if (Mathf.Approximately(puzzleArray[i].transform.localEulerAngles.x, 0))
+            if (puzzleArray[i].transform.up == Vector3.up)
             {
-                //Debug.Log(i);
-                //Debug.Log(puzzleArray[i].transform.localEulerAngles.x);
                 stateChecker[i] = true;
             }
             else
@@ -61,8 +59,7 @@ public class PuzzleManager : MonoBehaviour
 
     private void Complete()
     {
-        Debug.Log("Puzzle completed");
-        questManager.OnValueChange();
-        door.Open();
+        questManager.OnValueChange(); // Updates the quest value
+        door.Open(); // Opens the door connected to this puzzle
     }
 }

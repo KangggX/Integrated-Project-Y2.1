@@ -124,10 +124,10 @@ public class Anubis : MonoBehaviour
             nextState = "Enraged";
         }
 
-        if (playerInRange && canAttack)
-        {
-            StartCoroutine(AttackCooldown());
-        }
+        //if (playerInRange && canAttack)
+        //{
+        //    StartCoroutine(AttackCooldown());
+        //}
 
         // Set the speed of the AI
         agentComponent.speed = moveSpeed;
@@ -254,7 +254,8 @@ public class Anubis : MonoBehaviour
         while (currentState == "ChasingPlayer")
         {
             // This while loop will contain the ChasingPlayer behaviour
-
+            animator.SetBool("isAttacking", false);
+            
             yield return null;
 
             // If there is a player to chase, keep chasing the player
@@ -264,8 +265,9 @@ public class Anubis : MonoBehaviour
 
                 if (playerInRange)
                 {
-                    animator.SetBool("isWalking", false);
-                    moveSpeed = 0;
+                    //animator.SetBool("isWalking", false);
+                    //moveSpeed = 0;
+                    nextState = "Attacking";
                 }
                 else
                 {
@@ -287,12 +289,75 @@ public class Anubis : MonoBehaviour
     {
         while (currentState == "Enraged")
         {
+            yield return null;
+
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isAttacking", false);
             animator.SetBool("isEnraged", true);
             animator.SetTrigger("isActivated");
 
             yield return new WaitForSeconds(3.5f);
 
-            nextState = "Idle";
+            canAttack = true;
+            nextState = "ChasingPlayer";
+        }
+    }
+
+    IEnumerator Attacking()
+    {
+        while (currentState == "Attacking")
+        {
+            yield return null;
+
+            if (!isEnraged && canAttack && playerInRange)
+            {
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isAttacking", true);
+                moveSpeed = 0;
+                canAttack = false;
+
+                yield return new WaitForSeconds(0.3f);
+
+                player.TakeDamage(damage);
+
+                yield return new WaitForSeconds(0.8f);
+
+                animator.SetBool("isAttacking", false);
+
+                yield return new WaitForSeconds(2f);
+
+                moveSpeed = storedMoveSpeed;
+                canAttack = true;
+            }
+            else if (isEnraged && canAttack && playerInRange)
+            {
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isAttacking", true);
+                moveSpeed = 0; // Make it stay still while attacking
+                canAttack = false;
+
+                yield return new WaitForSeconds(1.5f);
+
+                player.TakeDamage(damage);
+                player.moveSpeed = 0; // Stun the player
+
+                yield return new WaitForSeconds(1.5f);
+
+                player.moveSpeed = player.storedMoveSpeed;
+
+                yield return new WaitForSeconds(0.4f);
+
+                animator.SetBool("isAttacking", false);
+
+                yield return new WaitForSeconds(1.5f);
+
+                moveSpeed = storedMoveSpeed;
+                canAttack = true;
+            }
+            else
+            {
+                nextState = "ChasingPlayer";
+            }
         }
     }
 

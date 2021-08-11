@@ -1,3 +1,10 @@
+/******************************************************************************
+Author: Kang Xuan
+Name of Class: TriggerArea
+Description of Class: Manages the trigger area of the AI.
+Date Created: 09/08/21
+******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

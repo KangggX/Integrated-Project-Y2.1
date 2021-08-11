@@ -47,6 +47,10 @@ public class Collectible : MonoBehaviour
         {
             player.weapon.SetActive(true);
         }
+        else if (itemType == "Keystone")
+        {
+            player.hasKey = true;
+        }
         else if (itemType == "jewel")
         {
             beatleSpawner.isActivated = true;

@@ -9,6 +9,8 @@ TagManager:
   - Collectible
   - Enemy
   - Puzzle
+  - Chest
+  - Door
   layers:
   - Default
   - TransparentFX

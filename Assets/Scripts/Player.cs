@@ -33,11 +33,12 @@ public class Player : MonoBehaviour
     private float staminaRegenTimer;
 
     /// <summary>
-    /// Player inventory settings, mainly for the Hand Torch and Weapon
+    /// Player inventory settings (shortcut)
     /// </summary>
     [Header("Player Inventory")]
     public GameObject handTorch;
     public GameObject weapon;
+    public bool hasKey;
 
     /// <summary>
     /// The camera attached to the player model.
@@ -298,6 +299,24 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     hit.collider.GetComponent<Collectible>().PickUp();
+                }
+            }
+            else if (hit.collider.CompareTag("Chest")) // If collider has a tag called "Collectible"
+            {
+                uIManager.SetCrosshairText(true, "Open the Chest", 1);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    hit.collider.GetComponent<Chest>().Open();
+                }
+            }
+            else if (hit.collider.CompareTag("Door")) // If collider has a tag called "Collectible"
+            {
+                uIManager.SetCrosshairText(true, "Open the Door", 1);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    hit.collider.GetComponent<Door>().OpenAlt();
                 }
             }
             else if (hit.collider.CompareTag("Puzzle")) // If collider has a tag called "Puzzle"

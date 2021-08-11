@@ -11,25 +11,14 @@ using UnityEngine;
 
 public class PuzzlePiece : MonoBehaviour
 {
-    private QuestManager questManager;
-
     private void Awake()
     {
-        gameObject.transform.Rotate(Random.Range(0, 4) * 90, 0, 0);
+        gameObject.transform.Rotate(Random.Range(0, 4) * 90, 0, 0); // Randomize the rotation of this piece to 0, 90, 180, or 270 degrees upon starting
     }
 
-    private void Start()
-    {
-        questManager = FindObjectOfType<QuestManager>();
-    }
-
-    public void PickUp()
-    {
-        ++questManager.curr;
-        questManager.OnValueChange();
-        Destroy(gameObject);
-    }
-
+    /// <summary>
+    /// Rotates the puzzle piece by 90 degrees
+    /// </summary>
     public void RotatePiece()
     {
         gameObject.transform.Rotate(90, 0, 0);

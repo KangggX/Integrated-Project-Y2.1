@@ -8,6 +8,7 @@ Date Created: 09/08/2021
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BeatleSpawner : MonoBehaviour
 {
@@ -23,9 +24,10 @@ public class BeatleSpawner : MonoBehaviour
 
     private void Spawn()
     {
-        while (isActivated && currIndex < 10)
+        while (isActivated && currIndex < 1)
         {
-            Instantiate(beatle, this.transform);
+            Debug.Log(Instantiate(beatle, this.transform).GetComponent<NavMeshAgent>().Warp(this.transform.position));
+
             ++currIndex;
         }
     }
