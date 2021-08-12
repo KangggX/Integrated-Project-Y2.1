@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
 
     public void SetPauseUI(bool isPaused)
     {
-        if (isPaused)
+        if (isPaused && !pauseUI.activeInHierarchy)
         {
             pauseUI.SetActive(true);
         }

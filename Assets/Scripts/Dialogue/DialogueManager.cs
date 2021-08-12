@@ -76,8 +76,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     private void EndDialogue()
     {
-        Debug.Log("End of dialogue");
-        player.inDialogue = false;
         uIManager.dialogueUI.SetActive(false);
     }
 

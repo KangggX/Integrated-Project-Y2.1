@@ -286,8 +286,6 @@ public class Anubis : MonoBehaviour
                     animator.SetBool("isWalking", true);
                     moveSpeed = storedMoveSpeed;
                 }
-
-                
             }
             // If not, move back to the Idle state
             else

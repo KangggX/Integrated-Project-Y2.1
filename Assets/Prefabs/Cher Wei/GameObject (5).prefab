@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5988962875115830842}
   - component: {fileID: 3363937272536915113}
   - component: {fileID: 6626140555266315472}
+  - component: {fileID: 6181053845587543944}
   m_Layer: 0
   m_Name: GameObject (5)
   m_TagString: Untagged
@@ -72,6 +73,19 @@ MonoBehaviour:
   moveSpeed: 4
   idleTime: 0
   damage: 5
+--- !u!65 &6181053845587543944
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9014916420284848429}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2631483, y: 0.25198948, z: 0.20825687}
+  m_Center: {x: -0.00000010430813, y: -0.0131832585, z: -0.009495958}
 --- !u!1001 &894028654658981679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,7 +153,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8385264564832120558, guid: d3ba6d6b182523548b27e93c455eca4b, type: 3}
+    - {fileID: 6098472108040239295, guid: d3ba6d6b182523548b27e93c455eca4b, type: 3}
+    - {fileID: 1485884056128246216, guid: d3ba6d6b182523548b27e93c455eca4b, type: 3}
+    - {fileID: 2330611651568197828, guid: d3ba6d6b182523548b27e93c455eca4b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d3ba6d6b182523548b27e93c455eca4b, type: 3}
 --- !u!4 &2382334280900169633 stripped
 Transform:

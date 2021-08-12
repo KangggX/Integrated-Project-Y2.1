@@ -11,9 +11,25 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public UIManager UI;
-    public Player player;
+    /// <summary>
+    /// Game's main lighting
+    /// </summary>
+    public Light directionalLight;
 
+    /// <summary>
+    /// To be initialized in Start() function
+    /// </summary>
+    private UIManager UI;
+    private Player player;
+
+    /// <summary>
+    /// Skybox Material
+    /// </summary>
+    private Material skybox;
+
+    /// <summary>
+    /// Boolean to check if game is paused or not
+    /// </summary>
     private bool isPaused;
 
     /// <summary>
@@ -26,6 +42,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        skybox = RenderSettings.skybox;
+    }
+
+    private void Start()
+    {
+        // Initializing UI and player variable
+        UI = FindObjectOfType<UIManager>();
+        player = FindObjectOfType<Player>();
+
         // To store the player default Raycast, MoveSpeed, RotationSpeed, and MoveSpeedMultiplier value.
         storedRaycastLength = player.raycastLength;
         storedMoveSpeed = player.moveSpeed;
@@ -35,8 +60,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        UIManager uI = FindObjectOfType<UIManager>();
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -77,7 +100,6 @@ public class GameManager : MonoBehaviour
         player.raycastLength = 0;
         player.moveSpeed = 0;
         player.rotationSpeed = 0;
-        Debug.Log(player.rotationSpeed);
     }
 
     /// <summary>
@@ -121,5 +143,28 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    /// <summary>
+    /// Change the Environment of the game
+    /// </summary>
+    public IEnumerator ChangeEnvironment(bool dark)
+    {
+        if (dark)
+        {
+            yield return new WaitForSeconds(3); // Wait for 3 seconds before changing, synchronizing with the player teleporting
+
+            RenderSettings.skybox = null;
+            RenderSettings.sun = null;
+            directionalLight.gameObject.SetActive(false);
+        }
+        else
+        {
+            yield return new WaitForSeconds(3); // Wait for 3 seconds before changing, synchronizing with the player teleporting
+
+            RenderSettings.skybox = skybox;
+            RenderSettings.sun = directionalLight;
+            directionalLight.gameObject.SetActive(true);
+        }
     }
 }

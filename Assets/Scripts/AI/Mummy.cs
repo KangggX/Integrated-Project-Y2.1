@@ -71,7 +71,7 @@ public class Mummy : MonoBehaviour
     public int damage;
 
     private float health;
-    private bool playerInRange;
+    public bool playerInRange;
     private bool canAttack = true;
     private Canvas theCanvas;
     private Slider healthBar;
@@ -117,10 +117,10 @@ public class Mummy : MonoBehaviour
             nextState = "Die";
         }
 
-        if (playerInRange && canAttack)
-        {
-            StartCoroutine(AttackCooldown());
-        }
+        //if (playerInRange && canAttack)
+        //{
+        //    StartCoroutine(AttackCooldown());
+        //}
 
         // Set the speed of the AI
         agentComponent.speed = moveSpeed;
@@ -164,22 +164,6 @@ public class Mummy : MonoBehaviour
         if (health > 0)
         {
             health -= damage;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            playerInRange = false;
         }
     }
 
@@ -271,20 +255,65 @@ public class Mummy : MonoBehaviour
             {
                 agentComponent.SetDestination(playerToChase.position);
 
-                if (agentComponent.remainingDistance > agentComponent.stoppingDistance)
+                //if (agentComponent.remainingDistance > agentComponent.stoppingDistance)
+                //{
+                //    animator.SetBool("isWalking", true);
+                //}
+                //else if (agentComponent.remainingDistance <= agentComponent.stoppingDistance)
+                //{
+                //    Debug.Log("Hi");
+                //    animator.SetBool("isWalking", false);
+                //}
+
+                if (playerInRange)
+                {
+                    //animator.SetBool("isWalking", false);
+                    //moveSpeed = 0;
+                    nextState = "Attacking";
+                }
+                else
                 {
                     animator.SetBool("isWalking", true);
-                }
-                else if (agentComponent.remainingDistance <= agentComponent.stoppingDistance)
-                {
-                    Debug.Log("Hi");
-                    animator.SetBool("isWalking", false);
+                    moveSpeed = storedMoveSpeed;
                 }
             }
             // If not, move back to the Idle state
             else
             {
                 nextState = "Idle";
+            }
+        }
+    }
+
+    IEnumerator Attacking()
+    {
+        while (currentState == "Attacking")
+        {
+            yield return null;
+
+            if (canAttack && playerInRange)
+            {
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isAttacking", true);
+                moveSpeed = 0;
+                canAttack = false;
+
+                yield return new WaitForSeconds(1.13f);
+
+                player.TakeDamage(damage);
+
+                yield return new WaitForSeconds(1.04f);
+
+                animator.SetBool("isAttacking", false);
+
+                yield return new WaitForSeconds(1.5f);
+
+                moveSpeed = storedMoveSpeed;
+                canAttack = true;
+            }
+            else
+            {
+                nextState = "ChasingPlayer";
             }
         }
     }

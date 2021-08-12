@@ -26,11 +26,25 @@ public class Player : MonoBehaviour
     public float staminaRegenRate;
     public float staminaDepleteRate;
     public float staminaTimeToRegen;
+    public float healthTimeToRegen;
     public int raycastLength;
 
+    /// <summary>
+    /// To store the Player's current health and stamina
+    /// </summary>
     private float health;
     private float stamina;
+
+    /// <summary>
+    /// To store the time for the health and stamina regen
+    /// </summary>
+    private float healthRegenTimer;
     private float staminaRegenTimer;
+
+    /// <summary>
+    /// Player animator
+    /// </summary>
+    private Animator animator;
 
     /// <summary>
     /// Player inventory settings (shortcut)
@@ -56,9 +70,6 @@ public class Player : MonoBehaviour
     private UIManager uIManager;
     private GameManager gameManager;
 
-    [HideInInspector]
-    public bool inDialogue;
-
     /// <summary>
     /// Coroutine variable for player movement
     /// </summary>
@@ -72,6 +83,7 @@ public class Player : MonoBehaviour
         health = maxHealth;
         stamina = maxStamina;
 
+        // Store the movement speed and movement speed multiplier
         storedMoveSpeed = moveSpeed;
         storedMoveSpeedMultiplier = moveSpeedMultiplier;
     }
@@ -79,8 +91,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // Initializing GameManager and UIManager using FindObjectOfType<>()
         gameManager = FindObjectOfType<GameManager>();
         uIManager = FindObjectOfType<UIManager>();
+
+        // Getting the Player animator component
+        animator = GetComponent<Animator>();
 
         // To ensure that the cursor is not visible when player is playing the game.
         gameManager.CursorLock();
@@ -224,9 +240,23 @@ public class Player : MonoBehaviour
     /// </summary>
     private void CheckHealth()
     {
-        if (health <= 0)
+        if (health <= 0) // Once health reach 0 or below, player die
         {
             Die();
+        }
+        else if (health > 0 && health < 100) // Regen health over time
+        {
+            healthRegenTimer += Time.deltaTime;
+
+            if (healthRegenTimer >= healthTimeToRegen)
+            {
+                health += 10;
+                healthRegenTimer = 0;
+            }
+        }
+        else if (health > maxHealth) // To check if health regenerates to the maximum value
+        {
+            health = maxHealth;
         }
     }
 
@@ -259,28 +289,6 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// To check if player is currently in a Dialogue.
-    /// If true, player won't be able to move, rotate camera and interact with objects.
-    /// If true and player press 'E', display next Dialogue sentence.
-    /// </summary>
-    private void CheckDialogue()
-    {
-        if (inDialogue)
-        {
-            gameManager.PlayerLock();
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                FindObjectOfType<DialogueManager>().DisplayNextSentence();
-            }
-        }
-        else
-        {
-            gameManager.PlayerUnlock();
-        }
-    }
-
-    /// <summary>
     /// Raycast for player interaction.
     /// </summary>
     private void Raycast()
@@ -292,17 +300,7 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, raycastLength, layerMask))
         {
-            if (hit.collider.CompareTag("Dialogue")) // If collider has a tag called "Dialogue"
-            {
-                uIManager.SetCrosshairText(true, "Interact", 1);
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    hit.transform.GetComponent<DialogueTrigger>().TriggerDialogue();
-                    inDialogue = true;
-                }
-            }
-            else if (hit.collider.CompareTag("Collectible")) // If collider has a tag called "Collectible"
+            if (hit.collider.CompareTag("Collectible")) // If collider has a tag called "Collectible"
             {
                 uIManager.SetCrosshairText(true, "Collect", 1);
 
@@ -400,5 +398,6 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Debug.Log("Die");
+        animator.SetTrigger("isDead");
     }
 }

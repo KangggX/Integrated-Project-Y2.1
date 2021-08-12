@@ -22,15 +22,21 @@ public class Teleporter : MonoBehaviour
     public Animator transition;
 
     /// <summary>
-    /// GameManager and Player variable
+    /// Boolean to check if the Teleporter is placed outdoor or indoor
+    /// </summary>
+    public bool outdoor;
+
+    /// <summary>
     /// To be initialized in Start() function using FindObjectOfType<>()
     /// </summary>
     private GameManager gameManager;
+    private QuestManager questManager;
     private Player player;
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        questManager = FindObjectOfType<QuestManager>();
         player = FindObjectOfType<Player>();
     }
 
@@ -38,6 +44,17 @@ public class Teleporter : MonoBehaviour
     {
         
         StartCoroutine(Transition());
+
+        if (outdoor)
+        {
+            StartCoroutine(gameManager.ChangeEnvironment(outdoor));
+            questManager.OnValueChange();
+            
+        }
+        else
+        {
+            StartCoroutine(gameManager.ChangeEnvironment(outdoor));
+        }
     }
 
     IEnumerator Transition()

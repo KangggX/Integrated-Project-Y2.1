@@ -24,7 +24,7 @@ public class BeatleSpawner : MonoBehaviour
 
     private void Spawn()
     {
-        while (isActivated && currIndex < 1)
+        while (isActivated && currIndex < 10)
         {
             Debug.Log(Instantiate(beatle, this.transform).GetComponent<NavMeshAgent>().Warp(this.transform.position));
 

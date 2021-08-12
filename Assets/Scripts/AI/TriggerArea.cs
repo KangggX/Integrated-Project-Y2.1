@@ -12,17 +12,32 @@ using UnityEngine;
 public class TriggerArea : MonoBehaviour
 {
     private Anubis anubis;
+    private Mummy mummy;
 
     private void Awake()
     {
-        anubis = transform.GetComponentInParent<Anubis>();
+        if (GetComponentInParent<Mummy>() == null)
+        {
+            anubis = GetComponentInParent<Anubis>();
+        }
+        else
+        {
+            mummy = GetComponentInParent<Mummy>();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            anubis.playerInRange = !anubis.playerInRange;
+            if (mummy == null)
+            {
+                anubis.playerInRange = !anubis.playerInRange;
+            }
+            else
+            {
+                mummy.playerInRange = !mummy.playerInRange;
+            }
         }
     }
 
@@ -30,7 +45,14 @@ public class TriggerArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            anubis.playerInRange = !anubis.playerInRange;
+            if (mummy == null)
+            {
+                anubis.playerInRange = !anubis.playerInRange;
+            }
+            else
+            {
+                mummy.playerInRange = !mummy.playerInRange;
+            }
         }
     }
 }
