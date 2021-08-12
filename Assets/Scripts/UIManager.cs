@@ -43,6 +43,13 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI dialogueName;
     public TextMeshProUGUI dialogueSentence;
 
+    [Header("Misc")]
+    /// <summary>
+    /// The Animator of the FadeIn and FadeOut effect
+    /// </summary>
+    public Animator transition;
+    public TextMeshProUGUI deathText;
+
     private void Awake()
     {
         crosshairTextObject.SetActive(false);
@@ -128,5 +135,14 @@ public class UIManager : MonoBehaviour
     {
         optionsUI.SetActive(false);
         pauseUI.SetActive(true);
+    }
+
+    IEnumerator Die()
+    {
+        transition.SetBool("isEnabled", true);
+
+        yield return new WaitForSeconds(3);
+
+        deathText.gameObject.SetActive(true);
     }
 }
