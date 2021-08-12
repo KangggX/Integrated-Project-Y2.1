@@ -84,6 +84,12 @@ public class Anubis : MonoBehaviour
     private bool isEnraged;
 
     /// <summary>
+    /// Managers of the game
+    /// </summary>
+    private QuestManager questManager;
+    private UIManager UI;
+
+    /// <summary>
     /// 
     /// </summary>
     private Canvas theCanvas;
@@ -111,7 +117,9 @@ public class Anubis : MonoBehaviour
         // Set the starting state as Idle
         nextState = "Idle";
 
-        // Find the player object
+        // Find the different GameObjects
+        questManager = FindObjectOfType<QuestManager>();
+        UI = FindObjectOfType<UIManager>();
         player = FindObjectOfType<Player>();
 
         theCanvas = Instantiate(HealthPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + healthBarPosition, gameObject.transform.position.z), transform.rotation, gameObject.transform);
@@ -350,10 +358,12 @@ public class Anubis : MonoBehaviour
 
                 player.TakeDamage(damage);
                 player.moveSpeed = 0; // Stun the player
+                UI.stun.SetActive(true); // Show the stunned UI
 
                 yield return new WaitForSeconds(1.5f);
 
-                player.moveSpeed = player.storedMoveSpeed;
+                player.moveSpeed = player.storedMoveSpeed; // Player can move again
+                UI.stun.SetActive(false); // Hide the stunned UI
 
                 yield return new WaitForSeconds(0.4f);
 
@@ -378,10 +388,10 @@ public class Anubis : MonoBehaviour
             animator.SetBool("isWalking", false);
             animator.SetBool("isAttacking", false);
             animator.SetTrigger("isDead");
-            
 
             yield return new WaitForSeconds(4);
 
+            questManager.OnValueChange();
             Destroy(gameObject);
         }
     }
