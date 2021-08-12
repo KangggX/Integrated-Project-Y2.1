@@ -8,6 +8,7 @@ Date Created: 29/07/2021
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -143,6 +144,14 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    /// <summary>
+    /// Brings the player back to the main menu
+    /// </summary>
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     /// <summary>
