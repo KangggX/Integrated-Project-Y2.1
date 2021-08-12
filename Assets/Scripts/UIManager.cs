@@ -48,11 +48,19 @@ public class UIManager : MonoBehaviour
     /// The Animator of the FadeIn and FadeOut effect
     /// </summary>
     public Animator transition;
+    public Animator damaged;
+    public GameObject stun;
     public TextMeshProUGUI deathText;
+    private GameManager gameManager;
 
     private void Awake()
     {
         crosshairTextObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Function to be used to update the slider value of the health UI based on player health.
@@ -137,12 +145,16 @@ public class UIManager : MonoBehaviour
         pauseUI.SetActive(true);
     }
 
-    IEnumerator Die()
+    public IEnumerator Die()
     {
         transition.SetBool("isEnabled", true);
 
         yield return new WaitForSeconds(3);
 
         deathText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2);
+
+        gameManager.BackToMenu();
     }
 }

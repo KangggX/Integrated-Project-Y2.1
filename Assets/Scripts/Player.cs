@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
+        uIManager.damaged.SetTrigger("isDamaged");
         health -= damage;
     }
 
@@ -250,7 +251,7 @@ public class Player : MonoBehaviour
 
             if (healthRegenTimer >= healthTimeToRegen)
             {
-                health += 10;
+                health += 5;
                 healthRegenTimer = 0;
             }
         }
@@ -358,7 +359,6 @@ public class Player : MonoBehaviour
     /// <param name="enemy"></param>
     private void Attack(GameObject enemy)
     {
-        Debug.Log("Attack!");
         enemy.GetComponent<Enemy>().TakeDamage(damage);
     }
 
@@ -397,7 +397,8 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Die");
         animator.SetTrigger("isDead");
+        gameManager.PlayerLock();
+        StartCoroutine(uIManager.Die());
     }
 }
