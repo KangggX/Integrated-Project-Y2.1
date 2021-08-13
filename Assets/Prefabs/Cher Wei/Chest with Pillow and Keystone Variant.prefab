@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5420074031241525287, guid: 11819d320ee60bb4a9ac460ebf059efd, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11819d320ee60bb4a9ac460ebf059efd, type: 3}
@@ -172,6 +172,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Large Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3048766585648009451, guid: e89dc0e7baca864469aece8e4cc34b29, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155843288057157167, guid: e89dc0e7baca864469aece8e4cc34b29, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e89dc0e7baca864469aece8e4cc34b29, type: 3}
 --- !u!1001 &4067325280222191032
@@ -181,9 +189,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1912297451236294060, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2174000008983117385, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2770841401273815033, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
       propertyPath: m_Name
       value: Chest with Pillow and Keystone Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770841401273815033, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2940282612164601515, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943430232399595428, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3260554721360827715, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
       propertyPath: m_RootOrder
@@ -239,6 +267,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3260554721360827715, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361161312446656622, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504740334537927288, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550764485257121113, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6978193699988909932, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7956041732734194382, guid: 504ef2d45f80fe74fbaaa65a8402fdd4, type: 3}
