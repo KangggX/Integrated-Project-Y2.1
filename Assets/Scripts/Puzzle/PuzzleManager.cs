@@ -27,6 +27,8 @@ public class PuzzleManager : MonoBehaviour
     /// </summary>
     private QuestManager questManager;
 
+    private bool isCompleted;
+
     private void Awake()
     {
         puzzleArray = GetComponentsInChildren<PuzzlePiece>();
@@ -51,9 +53,10 @@ public class PuzzleManager : MonoBehaviour
             }
         }
 
-        if (stateChecker[0] && stateChecker[1] && stateChecker[2] && stateChecker[3]) 
+        if (stateChecker[0] && stateChecker[1] && stateChecker[2] && stateChecker[3] && !isCompleted) 
         {
             Complete();
+            isCompleted = true;
         }
     }
 
