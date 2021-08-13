@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &5130213602398286319
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4945936044301701660}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 727340611895323768, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
 --- !u!95 &8233145770100330811
 Animator:
   serializedVersion: 3
@@ -19,20 +33,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &5130213602398286319
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945936044301701660}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 727340611895323768, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
 --- !u!1001 &3528225148951358024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,13 +84,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -840562668833130412, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 61648662114550679, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6a4d66ea11b88654eb8e94cb4697146a, type: 2}
+    - target: {fileID: 425995575081266085, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 635922719749433873, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
       propertyPath: m_Name
       value: Square_Deco Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2265201988380015175, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -100,6 +116,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6a4d66ea11b88654eb8e94cb4697146a, type: 2}
+    - target: {fileID: 7647706460005066452, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63a7ce6973e50bb4f89e2fdc05bc55b4, type: 3}
 --- !u!1 &4945936044301701660 stripped

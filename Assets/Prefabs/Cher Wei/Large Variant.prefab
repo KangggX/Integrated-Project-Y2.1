@@ -7,13 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4567189007359077300, guid: a4daee8fb4e7b8947935763e22f08f03, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5027667282531385305, guid: a4daee8fb4e7b8947935763e22f08f03, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 174a9b5e6cd20334786cae6ef1c35595, type: 2}
     - target: {fileID: 8529860251394452848, guid: a4daee8fb4e7b8947935763e22f08f03, type: 3}
       propertyPath: m_Name
-      value: Large
+      value: Large Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529860251394452848, guid: a4daee8fb4e7b8947935763e22f08f03, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 9019573261790836682, guid: a4daee8fb4e7b8947935763e22f08f03, type: 3}
       propertyPath: m_RootOrder
