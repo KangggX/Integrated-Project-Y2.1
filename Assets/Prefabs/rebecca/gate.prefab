@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 158621482913867348}
   - component: {fileID: 267849067908047641}
   - component: {fileID: -1511062728427510217}
+  - component: {fileID: -3319361550398327479}
   m_Layer: 0
   m_Name: gate
   m_TagString: Untagged
@@ -96,3 +97,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1556410543170635569, guid: 975473452f7f481409b3546afe077284, type: 3}
+--- !u!208 &-3319361550398327479
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8349527556773915492}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.2470001, y: 1.756, z: 0.402}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.30200002, y: 0.68500006, z: 0}
+  m_TimeToStationary: 0.5

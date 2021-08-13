@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5360406546176383326}
   - component: {fileID: 3593932758738930344}
   - component: {fileID: 1249735124815594934}
+  - component: {fileID: -1772521430333175407}
   m_Layer: 0
   m_Name: pillar
   m_TagString: Untagged
@@ -96,3 +97,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8907757473011522176, guid: 975473452f7f481409b3546afe077284, type: 3}
+--- !u!208 &-1772521430333175407
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582636970374195425}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.45800003, y: 1.6550001, z: 0.44000003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
