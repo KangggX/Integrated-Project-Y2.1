@@ -80,8 +80,13 @@
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+<<<<<<< HEAD
                 "key": "SubdivideEdges.rangeExpanded",
                 "value": "{\"m_Value\":false}"
+=======
+                "key": "editor.extrudeEdgesAsGroup",
+                "value": "{\"m_Value\":true}"
+>>>>>>> 908e219f2fa731d1d09d5ea1c0d525e97e5b1d66
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -141,6 +146,7 @@
             {
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ExtrudeFaces.distance",
+<<<<<<< HEAD
                 "value": "{\"m_Value\":0.5}"
             },
             {
@@ -162,6 +168,9 @@
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "SubdivideEdges.subdivisionsUIMax",
                 "value": "{\"m_Value\":32}"
+=======
+                "value": "{\"m_Value\":2.869999885559082}"
+>>>>>>> 908e219f2fa731d1d09d5ea1c0d525e97e5b1d66
             }
         ]
     }
