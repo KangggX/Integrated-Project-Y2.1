@@ -11,9 +11,15 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
+    Animator animator; // Gets the GameObject Animator component
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void Open()
     {
-        Animator animator = GetComponent<Animator>(); // Gets the GameObject Animator component
         gameObject.layer = 0; // To ensure that the raycast does not detect it anymore once opened
 
         animator.SetBool("isOpened", true); // Plays the chest opening animation
