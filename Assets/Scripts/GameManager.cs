@@ -151,9 +151,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void BackToMenu()
     {
-        SceneManager.LoadScene(0);
-        PlayerUnlock();
-        Time.timeScale = 1f;
+        CursorUnlock(); // Unlocks the cursor
+        PlayerUnlock(); // Unlocks the player
+        Time.timeScale = 1f; // Set time back to normal
+        SceneManager.LoadScene(0); // Load main menu
     }
 
     /// <summary>
@@ -165,17 +166,17 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(3); // Wait for 3 seconds before changing, synchronizing with the player teleporting
 
-            RenderSettings.skybox = null;
-            RenderSettings.sun = null;
-            directionalLight.gameObject.SetActive(false);
+            RenderSettings.skybox = null; // Change skybox to none
+            RenderSettings.sun = null; // Disable the sun
+            directionalLight.gameObject.SetActive(false); // Disable the sun
         }
         else
         {
             yield return new WaitForSeconds(3); // Wait for 3 seconds before changing, synchronizing with the player teleporting
 
-            RenderSettings.skybox = skybox;
-            RenderSettings.sun = directionalLight;
-            directionalLight.gameObject.SetActive(true);
+            RenderSettings.skybox = skybox; // Change skybox back to default
+            RenderSettings.sun = directionalLight; // Enable the sun
+            directionalLight.gameObject.SetActive(true); // Enable the sun
         }
     }
 }

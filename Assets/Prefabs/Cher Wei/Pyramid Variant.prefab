@@ -101,6 +101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pyramid Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ccd58d34d0f2f7f4081d016fc69ec234, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 947831996833276542, guid: ccd58d34d0f2f7f4081d016fc69ec234, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295

@@ -20,17 +20,26 @@ public class UIManager : MonoBehaviour
     public Slider healthSlider;
     public Slider staminaSlider;
 
+    /// <summary>
+    /// Player UI crosshair settings
+    /// </summary>
     [Header("Player UI - Crosshair")]
     public GameObject crosshairTextObject;
     public GameObject crosshairIcon1;
     public GameObject crosshairIcon2;
     public TextMeshProUGUI crosshairText;
 
+    /// <summary>
+    /// Player UI related to the Quest UI
+    /// </summary>
     [Header("Player UI - Quest")]
     public TextMeshProUGUI questTitle;
     public TextMeshProUGUI questDesc;
     public TextMeshProUGUI questVal;
 
+    /// <summary>
+    /// Pause menu UI
+    /// </summary>
     [Header("Player UI - Pause Menu")]
     public GameObject pauseUI;
     public GameObject optionsUI;
@@ -51,6 +60,7 @@ public class UIManager : MonoBehaviour
     public Animator damaged;
     public GameObject stun;
     public TextMeshProUGUI deathText;
+    public TextMeshProUGUI victoryText;
     private GameManager gameManager;
 
     private void Awake()
@@ -121,6 +131,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// To show or hide the Pause Menu
+    /// </summary>
+    /// <param name="isPaused"></param>
     public void SetPauseUI(bool isPaused)
     {
         if (isPaused && !pauseUI.activeInHierarchy)
@@ -133,18 +147,45 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function to open the options menu
+    /// </summary>
     public void OpenOptions()
     {
         optionsUI.SetActive(true);
         pauseUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Function to close the options menu
+    /// </summary>
     public void CloseOptions()
     {
         optionsUI.SetActive(false);
         pauseUI.SetActive(true);
     }
 
+    /// <summary>
+    /// Coroutine when player is victorious
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Victory()
+    {
+        transition.SetBool("isEnabled", true);
+
+        yield return new WaitForSeconds(3);
+
+        victoryText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2);
+
+        gameManager.BackToMenu();
+    }
+
+    /// <summary>
+    /// Coroutine when player dies
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator Die()
     {
         transition.SetBool("isEnabled", true);
