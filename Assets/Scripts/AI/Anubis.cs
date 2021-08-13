@@ -336,7 +336,7 @@ public class Anubis : MonoBehaviour
 
                 yield return new WaitForSeconds(0.3f);
 
-                player.TakeDamage(damage);
+                player.TakeDamage(damage); // Player taking damage
 
                 yield return new WaitForSeconds(0.8f);
 
@@ -356,7 +356,7 @@ public class Anubis : MonoBehaviour
 
                 yield return new WaitForSeconds(1.5f);
 
-                player.TakeDamage(damage);
+                player.TakeDamage(damage); // Player taking damage
                 player.moveSpeed = 0; // Stun the player
                 UI.stun.SetActive(true); // Show the stunned UI
 
@@ -367,12 +367,12 @@ public class Anubis : MonoBehaviour
 
                 yield return new WaitForSeconds(0.4f);
 
-                animator.SetBool("isAttacking", false);
+                animator.SetBool("isAttacking", false); // Stop the attacking animation
 
                 yield return new WaitForSeconds(1.5f);
 
-                moveSpeed = storedMoveSpeed;
-                canAttack = true;
+                moveSpeed = storedMoveSpeed; // AI can move again
+                canAttack = true; // AI can attack again
             }
             else
             {
@@ -385,14 +385,15 @@ public class Anubis : MonoBehaviour
     {
         while (currentState == "Die")
         {
+            // Stop all current animations and activate the "isDead" trigger
             animator.SetBool("isWalking", false);
             animator.SetBool("isAttacking", false);
             animator.SetTrigger("isDead");
 
             yield return new WaitForSeconds(4);
 
-            questManager.OnValueChange();
-            Destroy(gameObject);
+            questManager.OnValueChange(); // Quest value change
+            Destroy(gameObject); // AI destroyed
         }
     }
 
