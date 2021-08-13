@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
     public GameObject handTorch;
     public GameObject weapon;
     public bool hasKey;
+    public bool hasJewel;
 
     /// <summary>
     /// The camera attached to the player model.
@@ -370,13 +371,14 @@ public class Player : MonoBehaviour
         // Increase the value per frame
         staminaRegenTimer += Time.deltaTime;
 
+        // If player stamina is lesser than the max stamina amount and the regn timer is equals to the time to regen
         if (stamina < maxStamina && staminaRegenTimer >= staminaTimeToRegen)
         {
-            stamina += staminaRegenRate * Time.deltaTime;
+            stamina += staminaRegenRate * Time.deltaTime; // Regenerate stamina at this rate
 
             if (stamina > maxStamina)
             {
-                stamina = maxStamina;
+                stamina = maxStamina; // To prevent stamina from being over the max amount
             }
         }
     }
@@ -395,6 +397,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function when player dies
+    /// </summary>
     private void Die()
     {
         animator.SetTrigger("isDead");

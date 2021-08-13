@@ -30,30 +30,41 @@ public class Teleporter : MonoBehaviour
     /// To be initialized in Start() function using FindObjectOfType<>()
     /// </summary>
     private GameManager gameManager;
+    private UIManager UI;
     private QuestManager questManager;
     private Player player;
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        UI = FindObjectOfType<UIManager>();
         questManager = FindObjectOfType<QuestManager>();
         player = FindObjectOfType<Player>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        StartCoroutine(Transition());
-
-        if (outdoor)
+        // If player has the jewel, victory
+        if (player.hasJewel)
         {
-            StartCoroutine(gameManager.ChangeEnvironment(outdoor));
-            questManager.OnValueChange();
-            
+            StartCoroutine(UI.Victory());
         }
         else
         {
-            StartCoroutine(gameManager.ChangeEnvironment(outdoor));
+            // Transition animation
+            StartCoroutine(Transition());
+
+            // To check if the teleporter is placed outdoor or indoor to perform the necessary stuff
+            if (outdoor)
+            {
+                StartCoroutine(gameManager.ChangeEnvironment(outdoor));
+                questManager.OnValueChange();
+
+            }
+            else
+            {
+                StartCoroutine(gameManager.ChangeEnvironment(outdoor));
+            }
         }
     }
 

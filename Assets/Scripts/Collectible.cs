@@ -53,6 +53,7 @@ public class Collectible : MonoBehaviour
         }
         else if (itemType == "jewel")
         {
+            player.hasJewel = true;
             beatleSpawner.isActivated = true;
         }
 
