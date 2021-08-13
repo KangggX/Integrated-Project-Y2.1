@@ -108,8 +108,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -260,6 +260,7 @@ MonoBehaviour:
   handTorch: {fileID: 1331140907996713085}
   weapon: {fileID: 8719253932876789908}
   hasKey: 0
+  hasJewel: 0
   playerCamera: {fileID: 4172342029236545497}
   rotationSpeed: 100
 --- !u!95 &8038227225170992690
